@@ -1,0 +1,38 @@
+fork
+
+git clone <forked url> 
+
+open the cloned folder
+
+git remote add upstream <main repo link>
+git fetch upstream
+git checkout main
+git merge upstream/main
+
+git push origin main
+
+git add .
+git commit -m "any message"
+git config --global user.email "your email"
+git config --global user.name "your name"
+git commit -m "any message"
+
+git push origin main
+
+the files will be stored in your forked repository to update main repository :
+Create a Pull Request (PR)
+Switch to your forked repository on GitHub.
+Click the "Pull requests" tab.
+Click "New pull request".
+Select the base repository and branch (main repository's branch where you want to merge your changes).
+Base repository: The main repository (original repo).
+Base branch: The branch in the main repo (commonly main or master).
+Head repository: Your fork.
+Head branch: The branch in your fork where your changes are.
+Add a PR Title and Description
+Provide a clear and concise title for the PR.
+Add a detailed description explaining what changes you made and why they're important.
+Include screenshots or references, if necessary.
+Submit the PR
+Click "Create pull request".
+The maintainers of the main repository will now review your PR.
