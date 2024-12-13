@@ -18,7 +18,7 @@ git config --global user.name "your name"
 git commit -m "any message"
 
 git push origin main
-
+-------------------------------------------------------------------------------------------------------------------
 the files will be stored in your forked repository to update main repository :
 Create a Pull Request (PR)
 Switch to your forked repository on GitHub.
@@ -36,3 +36,7 @@ Include screenshots or references, if necessary.
 Submit the PR
 Click "Create pull request".
 The maintainers of the main repository will now review your PR.
+--------------------------------------------------------------------------------------------------------------
+to push the updated files from your computer to your github repo : git push origin main
+
+to get the updated files from your github repo to your computer : git pull origin main
