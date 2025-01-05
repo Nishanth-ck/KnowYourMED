@@ -16,9 +16,14 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "google-translate-api": "^2.3.0",
+    "google-translate-api-x": "^10.7.2",
+    "google-translate-free": "^2.4.5",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.0",
+    "node-cron": "^3.0.3",
     "nodemailer": "^6.9.16",
-    "nodemon": "^3.1.9"
+    "nodemon": "^3.1.9",
+    "qrcode": "^1.5.4"
   }
 }
