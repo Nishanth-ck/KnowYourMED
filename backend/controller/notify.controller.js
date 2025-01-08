@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
 import cron from "node-cron";
+import telesignsdk from "telesignsdk";
 
 const handleUserNotify = async (req, res) => {
   // Create the transporter for sending emails
@@ -47,4 +48,29 @@ const handleUserNotify = async (req, res) => {
   });
 };
 
-export default handleUserNotify;
+const smsController = async (req, res) => {
+  const { phone_num } = req.body;
+
+  const customerId = process.env.SMS_CUSTOMER_ID;
+  const apiKey = process.env.SMS_API_KEY;
+
+  const message = "Your Otp is : 1234";
+  const messageType = "OTP";
+
+  const client = new telesignsdk(customerId, apiKey);
+
+  function smsCallback(error, responseBody) {
+    if (error === null) {
+      res
+        .status(200)
+        .json({ message: "Success", data: JSON.stringify(responseBody) });
+    } else {
+      console.error("Unable to send SMS. Error:\n\n" + error);
+      res.status(500).json({ error: "Try again later!" });
+    }
+  }
+
+  client.sms.message(smsCallback, phone_num, message, messageType);
+};
+
+export { handleUserNotify, smsController };

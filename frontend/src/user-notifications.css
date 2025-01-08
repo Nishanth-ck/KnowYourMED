@@ -1,0 +1,69 @@
+/* Card Styling */
+.custom-card {
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Transparent background with black tint */
+  color: white; /* White text color */
+  border: none;
+  border-radius: 10px;
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.custom-card:hover {
+  transform: scale(1.05); /* Slight zoom effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
+}
+
+/* Card Title */
+.custom-card .card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+/* Card Text */
+.custom-card .card-text {
+  font-size: 1rem;
+}
+
+/* Ensure cards align properly */
+.card-body {
+  padding: 20px;
+}
+
+.btn-info {
+  background-color: #17a2b8;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 15px;
+  transition: background-color 0.3s;
+}
+
+.btn-info:hover {
+  background-color: #138496;
+}
+
+/* Custom styling for the Submit button */
+.custom-submit-btn {
+  font-size: 18px; /* Bigger font size */
+  padding: 15px 30px; /* Larger padding for a bigger button */
+  border-radius: 8px; /* Rounded corners */
+  background-color: green; /* Smooth transition */
+  width: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for a lifted effect */
+}
+
+/* Hover effect */
+.custom-submit-btn:hover {
+  background-color: #28a745; /* Slightly different shade of green on hover */
+  color: white; /* Text color changes on hover */
+  transform: scale(1.1); /* Slightly increase the button size */
+}
+
+@media (max-width: 768px) {
+  .col-md-4 {
+    width: 100%;
+  }
+}
