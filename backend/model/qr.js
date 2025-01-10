@@ -16,6 +16,12 @@ const qrSchema = new mongoose.Schema({
   manufacture_name: {
     type: String,
   },
+  medicine_info: {
+    type: mongoose.Schema.Types.Mixed,
+  },
+  manufacture_id: {
+    type: String,
+  },
 });
 
 const Qr = mongoose.model("qr", qrSchema);

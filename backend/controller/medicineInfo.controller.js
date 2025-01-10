@@ -57,8 +57,6 @@ const handleMedRetrieve = async (req, res) => {
   try {
     const result = await Qr.findById(medId);
 
-    console.log(medId);
-
     res.status(200).json({ message: "Done", result });
   } catch (err) {
     console.log(err);

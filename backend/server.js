@@ -10,6 +10,8 @@ import handleNotify from "./routes/notify.route.js";
 import handleQrCode from "./routes/qrcode.route.js";
 import handleMedicineInfo from "./routes/medicineInfo.route.js";
 import handlePill from "./routes/addPill.route.js";
+import handleManufactureInfo from "./routes/manufacture.route.js";
+import handleContact from "./routes/contact.route.js";
 
 const corsOptions = {
   method: "GET,POST",
@@ -22,14 +24,14 @@ const corsOptions = {
 dotenv.config();
 const app = express();
 
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", req.headers.origin);
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", req.headers.origin);
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   next();
+// });
 
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -38,10 +40,12 @@ app.use("/auth/user", handleUserAuth);
 app.use("/auth/manufacture", handlePharmacistAuth);
 app.use("/refreshToken", handleRefreshToken);
 app.use("/translate", handleTranslation);
-app.use("/notify", handleNotify);
+// app.use("/notify", handleNotify);
 app.use("/generate-qr", handleQrCode);
 app.use("/medicine", handleMedicineInfo);
 app.use("/maintain", handlePill);
+app.use("/manufacture", handleManufactureInfo);
+app.use("/contact", handleContact);
 
 app.get("/", (req, res) => {
   res.send("Hello World");

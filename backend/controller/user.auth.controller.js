@@ -54,13 +54,13 @@ const handleEmail = async (req, res) => {
       let transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: "maheshmahi18042004@gmail.com",
+          user: "knowyourmed1@gmail.com",
           pass: `${process.env.EMAIL_PASS}`,
         },
       });
 
       let mailOptions = {
-        from: "maheshmahi18042004@gmail.com",
+        from: "knowyourmed1@gmail.com",
         to: `${email}`,
         subject: "To Update the Password",
         text: `${num}`,
@@ -129,23 +129,23 @@ const handleUserLogin = async (req, res) => {
       expiresIn: "15m",
     });
 
-    const refToken = jwt.sign({ email: email }, process.env.SEC_REF, {
-      expiresIn: 24 * 60 * 60 * 100,
-    });
+    // const refToken = jwt.sign({ email: email }, process.env.SEC_REF, {
+    //   expiresIn: 24 * 60 * 60 * 100,
+    // });
 
-    res.cookie("jwt", refToken, {
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 100,
-      secure: false,
-    });
+    // res.cookie("jwt", refToken, {
+    //   httpOnly: true,
+    //   maxAge: 24 * 60 * 60 * 100,
+    //   secure: false,
+    // });
 
-    const response = await User.findByIdAndUpdate(
-      existingUser._id,
-      {
-        refreshToken: refToken,
-      },
-      { new: true }
-    );
+    // const response = await User.findByIdAndUpdate(
+    //   existingUser._id,
+    //   {
+    //     refreshToken: refToken,
+    //   },
+    //   { new: true }
+    // );
 
     return res.status(200).json({ accessToken: accToken, response });
   } catch (err) {
@@ -156,37 +156,34 @@ const handleUserLogin = async (req, res) => {
 };
 
 const handleUserLogout = async (req, res) => {
-  const refToken = req?.cookies?.jwt;
+  // const { userId } = req.body;
+  // const refToken = req?.cookies?.jwt;
 
-  if (!refToken) {
-    return res.sendStatus(401);
-  }
+  // if (!refToken) {
+  //   return res.sendStatus(401);
+  // }
 
   try {
-    const existingUser = await User.findOne({ refreshToken: refToken });
+    // const existingUser = await User.findOne({ refreshToken: refToken });
 
-    if (!existingUser) {
-      res.clearCookie("jwt", {
-        httpOnly: true,
-        maxAge: 24 * 60 * 60 * 100,
-        secure: false,
-      });
-      return res.status(200).json({ message: "Logout Successfull!" });
-    }
+    // if (!existingUser) {
+    //   res.clearCookie("jwt", {
+    //     httpOnly: true,
+    //     maxAge: 24 * 60 * 60 * 100,
+    //     secure: false,
+    //   });
+    //   return res.status(200).json({ message: "Logout Successfull!" });
+    // }
 
-    await User.findByIdAndUpdate(
-      existingUser._id,
-      { refreshToken: "" },
-      { new: true }
-    );
+    // await User.findByIdAndUpdate(userId, { refreshToken: "" }, { new: true });
 
-    res.clearCookie("jwt", {
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 100,
-      secure: false,
-    });
+    // res.clearCookie("jwt", {
+    //   httpOnly: true,
+    //   maxAge: 24 * 60 * 60 * 100,
+    //   secure: false,
+    // });
 
-    return res.status(200).json({ message: "Logout Successfull!" });
+    return res.status(204).json({ message: "Logout Successfull!" });
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Try again later!" });

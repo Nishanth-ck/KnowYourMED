@@ -5,9 +5,18 @@ import Pill from "../model/pill.js";
 
 const handleUserNotify = async (req, res) => {
   const { email, userId } = req.body;
+  let reminderTimes = [];
   try {
     const val = await Pill.find({ user: userId });
+
+    if (!val) {
+      return res
+        .status(404)
+        .json({ error: "User not found or no pill data available." });
+    }
+
     console.log(val);
+    reminderTimes = [val?.time1, val?.time2, val?.time3].filter(Boolean);
   } catch (err) {
     console.log(err);
     res.status(400).json({ error: "Try again later!" });
@@ -40,32 +49,56 @@ const handleUserNotify = async (req, res) => {
     });
   };
 
-  users.forEach((user) => {
-    user.reminderTimes.forEach((time) => {
-      const [hour, minute] = time.split(":");
-      const cronExpression = `${minute} ${hour} * * *`;
+  reminderTimes.forEach((time) => {
+    const [hour, minute] = time.split(":");
+    const cronExpression = `${minute} ${hour} * * *`;
 
-      // Schedule the cron job
-      const job = cron.schedule(cronExpression, async () => {
-        const currentDate = new Date();
-        const endDate = new Date(user.startDate); // Assume this is in the database
-        endDate.setDate(endDate.getDate() + user.duration); // e.g., 3 days or 7 days
+    // Schedule the cron job
+    const job = cron.schedule(cronExpression, async () => {
+      const currentDate = new Date();
+      const endDate = new Date(val.date); // Assume this is in the database
+      endDate.setDate(endDate.getDate() + val.duration); // e.g., 3 days or 7 days
 
-        if (currentDate <= endDate) {
-          console.log(`Sending email to ${user.email}...`);
-          sendEmail(user.email);
-        } else {
-          console.log(
-            `Stopping email job for ${user.email}, duration exceeded.`
-          );
-          job.stop(); // Stop the cron job
-          await updateJobStatus(user.userId, false); // Update job status in DB if needed
-        }
-      });
+      if (currentDate <= endDate) {
+        console.log(`Sending email to ${user.email}...`);
+        sendEmail();
+      } else {
+        console.log(`Stopping email job for ${user.email}, duration exceeded.`);
+        job.stop(); // Stop the cron job
+        // await updateJobStatus(user.userId, false); // Update job status in DB if needed
+      }
     });
   });
 
-  res.send("Notification scheduling initialized.");
+  res.status(200).json({ message: "Notification scheduling initialized." });
+
+  // users.forEach((user) => {
+  //   user.reminderTimes.forEach((time) => {
+  //     const [hour, minute] = time.split(":");
+  //     const cronExpression = `${minute} ${hour} * * *`;
+
+  //     // Schedule the cron job
+  //     const job = cron.schedule(cronExpression, async () => {
+  //       const currentDate = new Date();
+  //       const endDate = new Date(user.startDate); // Assume this is in the database
+  //       endDate.setDate(endDate.getDate() + user.duration); // e.g., 3 days or 7 days
+
+  //       if (currentDate <= endDate) {
+  //         console.log(`Sending email to ${user.email}...`);
+  //         sendEmail(user.email);
+  //       } else {
+  //         console.log(
+  //           `Stopping email job for ${user.email}, duration exceeded.`
+  //         );
+  //         job.stop(); // Stop the cron job
+  //         // await updateJobStatus(user.userId, false); // Update job status in DB if needed
+  //       }
+  //     });
+  //   });
+  // });
+
+  // res.status(200).json({ message: "Done" });
+  // res.send("Notification scheduling initialized.");
 
   // // Schedule emails at 8 AM, 2 PM, and 8 PM
   // cron.schedule("0 8 * * *", () => {

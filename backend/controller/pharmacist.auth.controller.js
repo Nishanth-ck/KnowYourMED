@@ -54,13 +54,13 @@ const handlePharmacistEmail = async (req, res) => {
       let transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: "maheshmahi18042004@gmail.com",
+          user: "knowyourmed1@gmail.com",
           pass: `${process.env.EMAIL_PASS}`,
         },
       });
 
       let mailOptions = {
-        from: "maheshmahi18042004@gmail.com",
+        from: "knowyourmed1@gmail.com",
         to: `${email}`,
         subject: "To Update the Password",
         text: `${num}`,
@@ -129,23 +129,23 @@ const handlePharmacistLogin = async (req, res) => {
       expiresIn: "15m",
     });
 
-    const refToken = jwt.sign({ email: email }, process.env.SEC_REF, {
-      expiresIn: 24 * 60 * 60 * 100,
-    });
+    // const refToken = jwt.sign({ email: email }, process.env.SEC_REF, {
+    //   expiresIn: 24 * 60 * 60 * 100,
+    // });
 
-    res.cookie("jwt", refToken, {
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 100,
-      secure: false,
-    });
+    // res.cookie("jwt", refToken, {
+    //   httpOnly: true,
+    //   maxAge: 24 * 60 * 60 * 100,
+    //   secure: false,
+    // });
 
-    const response = await Pharmacist.findByIdAndUpdate(
-      existingUser._id,
-      {
-        refreshToken: refToken,
-      },
-      { new: true }
-    );
+    // const response = await Pharmacist.findByIdAndUpdate(
+    //   existingUser._id,
+    //   {
+    //     refreshToken: refToken,
+    //   },
+    //   { new: true }
+    // );
 
     return res.status(200).json({ accessToken: accToken, response });
   } catch (err) {
@@ -155,35 +155,36 @@ const handlePharmacistLogin = async (req, res) => {
 };
 
 const handlePharmacistLogout = async (req, res) => {
-  const refToken = req?.cookies?.jwt;
+  // const { id } = req.body;
+  // const refToken = req?.cookies?.jwt;
 
-  if (!refToken) {
-    return res.sendStatus(403);
-  }
+  // if (!refToken) {
+  //   return res.sendStatus(403);
+  // }
 
   try {
-    const existingUser = await Pharmacist.findOne({ refreshToken: refToken });
+    // const existingUser = await Pharmacist.findOne({ refreshToken: refToken });
 
-    if (!existingUser) {
-      res.clearCookie("jwt", {
-        httpOnly: true,
-        maxAge: 24 * 60 * 60 * 100,
-        secure: false,
-      });
-      return res.sendStatus(204);
-    }
+    // if (!existingUser) {
+    //   res.clearCookie("jwt", {
+    //     httpOnly: true,
+    //     maxAge: 24 * 60 * 60 * 100,
+    //     secure: false,
+    //   });
+    //   return res.sendStatus(204);
+    // }
 
-    await User.findByIdAndUpdate(
-      existingUser._id,
-      { refreshToken: "" },
-      { new: true }
-    );
+    // await User.findByIdAndUpdate(
+    //   existingUser._id,
+    //   { refreshToken: "" },
+    //   { new: true }
+    // );
 
-    res.clearCookie("jwt", {
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 100,
-      secure: false,
-    });
+    // res.clearCookie("jwt", {
+    //   httpOnly: true,
+    //   maxAge: 24 * 60 * 60 * 100,
+    //   secure: false,
+    // });
 
     return res.status(204).json({ message: "Logout Successfull!" });
   } catch (err) {
