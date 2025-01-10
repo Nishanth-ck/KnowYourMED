@@ -6,7 +6,7 @@ import handleUserAuth from "./routes/user.auth.route.js";
 import handlePharmacistAuth from "./routes/pharmacist.auth.route.js";
 import handleRefreshToken from "./routes/refreshToken.route.js";
 import handleTranslation from "./routes/translate.route.js";
-import handleNotify from "./routes/notify.route.js";
+// import handleNotify from "./routes/notify.route.js";
 import handleQrCode from "./routes/qrcode.route.js";
 import handleMedicineInfo from "./routes/medicineInfo.route.js";
 import handlePill from "./routes/addPill.route.js";
