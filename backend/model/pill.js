@@ -10,9 +10,14 @@ const pillSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  time: {
+  time1: {
     type: String,
-    required: true,
+  },
+  time2: {
+    type: String,
+  },
+  time3: {
+    type: String,
   },
   date: {
     type: String,
@@ -24,6 +29,10 @@ const pillSchema = new mongoose.Schema({
   notification: {
     type: Boolean,
     default: true, // Sets a default value if not provided
+  },
+  user: {
+    type: String,
+    required: true,
   },
 });
 

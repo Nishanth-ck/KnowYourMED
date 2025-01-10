@@ -1,4 +1,5 @@
 import axios from "axios";
+import Qr from "../model/qr.js";
 
 const handleMedInfo = async (req, res) => {
   const name = req.params.name.trim(); // Ensure the name is trimmed
@@ -50,4 +51,19 @@ const handleMedInfo = async (req, res) => {
   }
 };
 
-export default handleMedInfo;
+const handleMedRetrieve = async (req, res) => {
+  const medId = req.params.medId;
+
+  try {
+    const result = await Qr.findById(medId);
+
+    console.log(medId);
+
+    res.status(200).json({ message: "Done", result });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Try again later" });
+  }
+};
+
+export { handleMedInfo, handleMedRetrieve };

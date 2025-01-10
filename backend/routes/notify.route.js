@@ -1,13 +1,10 @@
 import express from "express";
-import {
-  handleUserNotify,
-  smsController,
-} from "../controller/notify.controller.js";
+import { handleUserNotify } from "../controller/notify.controller.js";
 
 const router = express.Router();
 
-router.post("/", handleUserNotify);
+router.post("/email", handleUserNotify);
 
-router.post("/", smsController);
+// router.post("/sms", smsController);
 
 export default router;

@@ -25,7 +25,9 @@ const handleQRCodeGeneration = async (req, res) => {
       return res.status(401).json({ error: "Try again later!" });
     }
 
-    const text = result._id.toString();
+    const text = "http://localhost:3000/medicine/info/" + result._id.toString();
+
+    console.log(text);
 
     const qrCode = await QRCode.toDataURL(text, { width: 94 }); // Generate QR code as a base64 string
     res.status(201).json({ qrCode });
