@@ -11,6 +11,7 @@ const handleUserNotify = async (
   email
 ) => {
   const reminderTimes = [timeOne, timeTwo, timeThree].filter(Boolean);
+  console.log(email);
 
   // Create the transporter for sending emails
   const transporter = nodemailer.createTransport({
@@ -33,7 +34,7 @@ const handleUserNotify = async (
   const sendEmail = () => {
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
-        console.log("Error:", error);
+        console.log("Error:", error, email);
       } else {
         console.log("Email sent:", info.response);
       }
@@ -65,6 +66,7 @@ const handleUserNotify = async (
 const handleSavePill = async (req, res) => {
   const { pillName, dosage, times, duration, notify, date, userId, email } =
     req.body;
+  console.log("from frontend: ", email);
 
   try {
     const timeOne = times[0] ? times[0] : "";
@@ -98,10 +100,11 @@ const handleSavePill = async (req, res) => {
 };
 
 const handleGetPill = async (req, res) => {
-  const { pillId } = req.body;
+  const { userId } = req.body;
+  console.log(userId);
 
   try {
-    const value = await Pill.find({ user: pillId });
+    const value = await Pill.find({ user: userId });
 
     console.log(value);
 

@@ -9,6 +9,7 @@ const handleQRCodeGeneration = async (req, res) => {
     manufacture_date,
     batch_number,
     manufacture_name,
+    userId,
   } = req.body;
 
   try {
@@ -58,6 +59,7 @@ const handleQRCodeGeneration = async (req, res) => {
       batch_number: batch_number,
       manufacture_name: manufacture_name,
       medicine_info: medicineInfo,
+      manufacture_id: userId,
     });
 
     const result = await newQr.save();
@@ -67,7 +69,7 @@ const handleQRCodeGeneration = async (req, res) => {
     }
 
     const text =
-      "http://localhost:3000/medicine/info/" +
+      "http://localhost:5173/medicine/info/" +
       result._id.toString() +
       "  " +
       "medicine name : " +

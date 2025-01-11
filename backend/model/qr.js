@@ -20,7 +20,7 @@ const qrSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.Mixed,
   },
   manufacture_id: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
   },
 });
 

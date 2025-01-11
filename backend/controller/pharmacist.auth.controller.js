@@ -129,9 +129,9 @@ const handlePharmacistLogin = async (req, res) => {
       expiresIn: "15m",
     });
 
-    // const refToken = jwt.sign({ email: email }, process.env.SEC_REF, {
-    //   expiresIn: 24 * 60 * 60 * 100,
-    // });
+    const refToken = jwt.sign({ email: email }, process.env.SEC_REF, {
+      expiresIn: 24 * 60 * 60 * 100,
+    });
 
     // res.cookie("jwt", refToken, {
     //   httpOnly: true,
@@ -139,13 +139,13 @@ const handlePharmacistLogin = async (req, res) => {
     //   secure: false,
     // });
 
-    // const response = await Pharmacist.findByIdAndUpdate(
-    //   existingUser._id,
-    //   {
-    //     refreshToken: refToken,
-    //   },
-    //   { new: true }
-    // );
+    const response = await Pharmacist.findByIdAndUpdate(
+      existingUser._id,
+      {
+        refreshToken: refToken,
+      },
+      { new: true }
+    );
 
     return res.status(200).json({ accessToken: accToken, response });
   } catch (err) {

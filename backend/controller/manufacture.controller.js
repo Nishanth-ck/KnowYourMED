@@ -1,10 +1,12 @@
 import Qr from "../model/qr.js";
 
 const handleManufactureGeneratedInfo = async (req, res) => {
-  const { manufactureId } = req.body;
+  const { userId } = req.body;
+
+  console.log(userId);
 
   try {
-    const value = Qr.find({ manufacture_id: manufactureId });
+    const value = Qr.find({ manufacture_id: userId });
     res.status(200).json({ value });
   } catch (err) {
     console.log(err);
