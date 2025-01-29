@@ -1,5 +1,16 @@
 import mongoose from "mongoose";
 
+const medicineInfoSchema = new mongoose.Schema({
+  dosage: { type: String },
+  ageGroup: { type: String },
+  warnings: { type: String },
+  purpose: { type: String },
+  sideEffects: { type: String },
+  overdosage: { type: String },
+  adverseActions: { type: String },
+  generalPrecautions: { type: String },
+});
+
 const qrSchema = new mongoose.Schema({
   medicine_name: {
     type: String,
@@ -17,7 +28,10 @@ const qrSchema = new mongoose.Schema({
     type: String,
   },
   medicine_info: {
-    type: mongoose.Schema.Types.Mixed,
+    type: medicineInfoSchema,
+  },
+  qrCode: {
+    type: String,
   },
   manufacture_id: {
     type: mongoose.Schema.Types.ObjectId,

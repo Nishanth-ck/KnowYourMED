@@ -1,12 +1,12 @@
 import Qr from "../model/qr.js";
+import { stringify } from "flatted";
 
 const handleManufactureGeneratedInfo = async (req, res) => {
   const { userId } = req.body;
 
-  console.log(userId);
-
   try {
-    const value = Qr.find({ manufacture_id: userId });
+    const value = await Qr.find({ manufacture_id: userId });
+    // res.status(200).json(stringify(value));
     res.status(200).json({ value });
   } catch (err) {
     console.log(err);

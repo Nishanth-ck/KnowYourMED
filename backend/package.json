@@ -17,6 +17,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "flatted": "^3.3.2",
     "google-translate-api": "^2.3.0",
     "google-translate-api-x": "^10.7.2",
     "google-translate-free": "^2.4.5",

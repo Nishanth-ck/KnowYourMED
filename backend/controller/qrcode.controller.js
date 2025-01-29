@@ -1,6 +1,7 @@
 import QRCode from "qrcode";
 import Qr from "../model/qr.js";
 import axios from "axios";
+import mongoose from "mongoose";
 
 const handleQRCodeGeneration = async (req, res) => {
   const {
@@ -50,7 +51,7 @@ const handleQRCodeGeneration = async (req, res) => {
         ),
       };
     }
-    console.log("Med info : ", medicineInfo);
+    // console.log("Med info : ", medicineInfo);
 
     const newQr = await Qr.create({
       medicine_name: medicine_name,
@@ -78,10 +79,26 @@ const handleQRCodeGeneration = async (req, res) => {
       "expiry date : " +
       expiry_date;
 
-    console.log(text);
+    // console.log(text);
+    // console.log();
 
+    const QRid = result?._id.toString();
     const qrCode = await QRCode.toDataURL(text, { width: 94 }); // Generate QR code as a base64 string
-    res.status(201).json({ qrCode });
+
+    try {
+      const objectId = new mongoose.Types.ObjectId(QRid);
+      const response2 = await Qr.findOneAndUpdate(
+        { _id: objectId },
+        { $set: { qrCode: qrCode } },
+        { new: true }
+      );
+
+      res.status(201).json({ qrCode });
+    } catch (err) {
+      console.log(err);
+      res.status(201).json({ qrCode });
+    }
+    // res.status(201).json({ qrCode });
   } catch (err) {
     res.status(500).json({ error: "Failed to generate QR code" });
   }
