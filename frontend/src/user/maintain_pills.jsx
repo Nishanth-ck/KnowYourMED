@@ -3,10 +3,47 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./styles/maintain_pills.css";
 
-function MaintainPills() {
+const MaintainPills = () => {
+  // Check sessionStorage for the language, default to 'en' if not found
+  const [language, setLanguage] = useState(
+    sessionStorage.getItem("language") || "en"
+  );
+
+  // Translations for different languages
+  const translations = {
+    en: {
+      HomeNav: "Home",
+      ContactUsNav: "Contact Us",
+      LogOut: "Logout",
+      PillName: "Pill Name",
+      Dosage: "Dosage",
+      TimeSlots: "Time slots (atlease one required)",
+      Duration: "Duration (days)",
+      NotifyMe: "Notify Me",
+      AddTask: "Add Task",
+      SubmitTask: "Submit All Tasks",
+      TitleText: "Maintain Your Pills ",
+      LogoutToast: "You have been logged out",
+    },
+    kn: {
+      HomeNav: "ಹೋಮ್",
+      ContactUsNav: "ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ",
+      LogOut: "ಲಾಗ್ ಔಟ್",
+      PillName: "ಔಷಧಿಯ ಹೆಸರು",
+      Dosage: "ಡೋಸೇಜ್",
+      TimeSlots: "ಸಮಯ ಅವಧಿಗಳು (ಕನಿಷ್ಠ ಒಂದು ಅಗತ್ಯ)",
+      Duration: "ಅವಧಿ (ದಿನಗಳು)",
+      NotifyMe: "ನನಗೆ ಸೂಚಿಸಿ",
+      AddTask: "ಕಾರ್ಯವನ್ನು ಸೇರಿಸಿ",
+      SubmitTask: "ಎಲ್ಲಾ ಕಾರ್ಯಗಳನ್ನು ಸಲ್ಲಿಸಿ",
+      TitleText: "ನಿಮ್ಮ ಔಷಧಿಗಳನ್ನು ನಿರ್ವಹಿಸಿ",
+      LogoutToast: "ನೀವು ಲಾಗ್ ಔಟ್ ಆಗಿದ್ದೀರಿ",
+    },
+  };
+
   const [date, setDate] = useState(new Date());
   const [tasks, setTasks] = useState({});
   const [pillName, setPillName] = useState("");
@@ -17,8 +54,6 @@ function MaintainPills() {
   const [duration, setDuration] = useState("");
   const [notify, setNotify] = useState(true);
   const [collectedTasks, setCollectedTasks] = useState([]);
-  const [translations, setTranslations] = useState({});
-  const [selectedLanguage, setSelectedLanguage] = useState("en");
 
   useEffect(() => {
     const storedTasks = sessionStorage.getItem("tasks");
@@ -31,92 +66,16 @@ function MaintainPills() {
     sessionStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
-  // Fetch translations
-  useEffect(() => {
-    const storedLanguage = sessionStorage.getItem("language");
-    if (storedLanguage) {
-      setSelectedLanguage(storedLanguage);
-    }
-  }, []);
-
-  useEffect(() => {
-    sessionStorage.setItem("language", selectedLanguage);
-    fetchTranslations();
-  }, [selectedLanguage]);
-
-  const fetchTranslations = async () => {
-    const wordsToTranslate = [
-      "Home",
-      "Contact Us",
-      "Logout",
-      "Pill Name",
-      "Dosage",
-      "Time Slots",
-      "Duration",
-      "Notify me",
-      "Add Task",
-      "Submit All Tasks",
-      "Task deleted!",
-      "Task added successfully!",
-      "Please fill in pill name, dosage, and duration!",
-      "Please set at least one time slot!",
-      "Task for this pill already exists on this date!",
-    ];
-
-    const translatedTexts = {};
-    for (const word of wordsToTranslate) {
-      try {
-        const response = await fetch("http://localhost:3000/translate/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            text: word,
-            language: selectedLanguage,
-          }),
-        });
-
-        const result = await response.json();
-        if (response.ok) {
-          let translatedWord = result.translatedText;
-          if (translatedWord.includes("ಇದನ್ನು ಅನುವಾದಿಸಲಾಗುತ್ತಿದೆ")) {
-            translatedWord = translatedWord
-              .replace("ಇದನ್ನು ಅನುವಾದಿಸಲಾಗುತ್ತಿದೆ", "")
-              .trim();
-          }
-          translatedTexts[word] = translatedWord;
-        } else {
-          console.error(`Translation failed for word: ${word}`);
-        }
-      } catch (error) {
-        console.error("Error fetching translations:", error);
-      }
-    }
-
-    setTranslations(translatedTexts);
-  };
-
-  // const handleLanguageChange = (e) => {
-  //   setSelectedLanguage(e.target.value);
-  // };
-
   const handleDateChange = (selectedDate) => setDate(selectedDate);
 
   const addTask = () => {
     if (!pillName.trim() || !dosage.trim() || !duration.trim()) {
-      toast.error(
-        translations["Please fill in pill name, dosage, and duration!"] ||
-          "Please fill in pill name, dosage, and duration!"
-      );
+      toast.error("Please fill in pill name, dosage, and duration!");
       return;
     }
 
     if (!time1 && !time2 && !time3) {
-      toast.error(
-        translations["Please set at least one time slot!"] ||
-          "Please set at least one time slot!"
-      );
+      toast.error("Please set at least one time slot!");
       return;
     }
 
@@ -138,10 +97,7 @@ function MaintainPills() {
     };
 
     if ((tasks[key] || []).some((task) => task.pillName === pillName)) {
-      toast.error(
-        translations["Task for this pill already exists on this date!"] ||
-          "Task for this pill already exists on this date!"
-      );
+      toast.error("Task for this pill already exists on this date!");
       return;
     }
 
@@ -160,9 +116,7 @@ function MaintainPills() {
     setTime3("");
     setDuration("");
     setNotify(true);
-    toast.success(
-      translations["Task added successfully!"] || "Task added successfully!"
-    );
+    toast.success("Task added successfully!");
   };
 
   const deleteTask = (taskIndex) => {
@@ -181,7 +135,7 @@ function MaintainPills() {
       )
     );
 
-    toast.info(translations["Task deleted!"] || "Task deleted!");
+    toast.info("Task deleted!");
   };
 
   const sendToBackend = () => {
@@ -220,52 +174,65 @@ function MaintainPills() {
     });
   };
 
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    const name = sessionStorage.getItem("userName");
+    setUsername(name || "User");
+  }, []);
+
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    // Remove the session storage items
+    sessionStorage.removeItem("userName");
+    sessionStorage.removeItem("userToken");
+    sessionStorage.removeItem("userId");
+    sessionStorage.removeItem("email");
+    sessionStorage.removeItem("language");
+    toast.info(translations[language].LogoutToast),
+      {
+        autoClose: 5000, // Toast will stay for 10 seconds
+      };
+    setTimeout(() => {
+      navigate("/home");
+    }, 5000);
+  };
+
   return (
     <div className="maintain-pills-container">
-      {/* Language Selector */}
-      {/* <div className="language-selector">
-        <label htmlFor="language">Language:</label>
-        <select
-          id="language"
-          value={selectedLanguage}
-          onChange={handleLanguageChange}
-        >
-          <option value="en">English</option>
-          <option value="kn">Kannada</option>
-        </select>
-      </div> */}
-
-      <div className="navbar">
-        <Link to="/user/home" className="nav-link">
-          {translations["Home"] || "Home"}
-        </Link>
-        <Link to="/contactus" className="nav-link">
-          {translations["Contact Us"] || "Contact Us"}
-        </Link>
-        <Link to="/logout" className="nav-link">
-          Logout
-        </Link>
+      <div className="maintain-pills-navbar">
+        {/* Logo */}
+        <div className="nav-logo-container5">
+          <img src={"/logo3.jpg"} alt="KYM Logo" />
+        </div>
+        <div className="nav-links-container-maintainpills">
+          <Link to="/user/home" className="nav-linkVal-container-maintainpills">
+            {translations[language].HomeNav}
+          </Link>
+          <Link to="/contactus" className="nav-linkVal-container-maintainpills">
+            {translations[language].ContactUsNav}
+          </Link>
+          <Link
+            className="nav-linkVal-container-userhome"
+            onClick={handleLogout}
+          >
+            {translations[language].LogOut}
+          </Link>
+        </div>
       </div>
 
-      <div className="main-content">
+      <div className="main-content-maintainpills">
         {/* Calendar on Left */}
-        <div className="col-md-6">
-          <Calendar
-            onChange={handleDateChange}
-            value={date}
-            className="shadow rounded calendar-dark"
-          />
+        <div className="column1-maintainpills">
+          <Calendar onChange={handleDateChange} value={date} />
         </div>
 
         {/* Form on Right */}
-        <div className="col-md-6">
-          <h3 className="text-white font-extrabold">{date.toDateString()}</h3>
-          <ul className="list-group">
+        <div className="column1-maintainpills">
+          <h3 className="date-text-maintainpills">{date.toDateString()}</h3>
+          <ul className="ul-maintainpills">
             {(tasks[date.toDateString()] || []).map((task, index) => (
-              <li
-                key={index}
-                // className="list-group-item d-flex justify-content-between align-items-center"
-              >
+              <li key={index}>
                 <span>
                   {task.pillName} - {task.dosage}
                   <br />
@@ -290,22 +257,21 @@ function MaintainPills() {
           <div className="mt-3">
             <input
               type="text"
-              placeholder={translations["Pill Name"] || "Pill Name"}
+              placeholder={translations[language].PillName}
               value={pillName}
               onChange={(e) => setPillName(e.target.value)}
               className="form-control mb-2"
             />
             <input
               type="text"
-              placeholder={translations["Dosage"] || "Dosage"}
+              placeholder={translations[language].Dosage}
               value={dosage}
               onChange={(e) => setDosage(e.target.value)}
               className="form-control mb-2"
             />
             <div className="mb-2">
-              <label className="text-white mb-1">
-                {translations["Time Slots"] || "Time Slots"} (at least one
-                required)
+              <label className="label-txt-maintainpills">
+                {translations[language].TimeSlots}
               </label>
               <input
                 type="time"
@@ -331,7 +297,7 @@ function MaintainPills() {
             </div>
             <input
               type="number"
-              placeholder={translations["Duration"] || "Duration (days)"}
+              placeholder={translations[language].Duration}
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
               className="form-control mb-2"
@@ -345,32 +311,26 @@ function MaintainPills() {
                 checked={notify}
                 onChange={(e) => setNotify(e.target.checked)}
               />
-              <label
-                className="form-check-label text-white"
-                htmlFor="notifyCheck"
-              >
-                {translations["Notify me"] || "Notify me"}
+              <label className="label-txt-maintainpills" htmlFor="notifyCheck">
+                {translations[language].NotifyMe}
               </label>
             </div>
             <button onClick={addTask} className="btn btn-primary w-100">
-              {translations["Add Task"] || "Add Task"}
+              {translations[language].AddTask}
             </button>
             <button
               onClick={sendToBackend}
               className="btn btn-success w-100 mt-2"
             >
-              {translations["Submit All Tasks"] || "Submit All Tasks"}
+              {translations[language].SubmitTask}
             </button>
           </div>
         </div>
       </div>
 
       <ToastContainer />
-      <div className="logo-container-user-login">
-        <img src="/logo3.jpg" alt="KYM Logo" className="logo-user-page" />
-      </div>
     </div>
   );
-}
+};
 
 export default MaintainPills;

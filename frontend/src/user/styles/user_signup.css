@@ -1,30 +1,66 @@
-.signup-container {
+.signup-containerU {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   background: url("/img1.jpg") no-repeat center center/cover;
-  padding: 20px;
+  padding: 15px;
+  position: relative;
 }
 
-.signup-form {
+.language-selector2 {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+}
+
+.language-dropdown-container2 {
+  width: 150px; /* Smaller width for mobile */
+  max-width: 100%;
+}
+
+.language-dropdown2 {
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  padding: 0.5rem;
+  width: 100%;
+  background-color: white;
+}
+
+.nav-logo-container2 {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.nav-logo-container2 img {
+  border-radius: 50%;
+  height: 120px; /* Smaller size for mobile */
+  width: 120px;
+  transition: all 0.3s ease;
+}
+
+.signup-formU {
   background: white;
-  padding: 30px;
+  padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 500px;
+  margin-top: 60px; /* Space for the logo and language selector */
 }
 
-.signup-heading {
-  font-size: 2rem;
+.signup-headingU {
+  font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: bold;
   color: #007bff;
   text-align: center;
   margin-bottom: 20px;
 }
 
-.form-group {
+.form-groupU {
   margin-bottom: 15px;
 }
 
@@ -32,94 +68,119 @@ label {
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
+  font-size: clamp(0.875rem, 2vw, 1rem);
 }
 
 input {
   width: 100%;
-  padding: 10px;
+  padding: clamp(8px, 2vw, 10px);
   border: 1px solid #ddd;
   border-radius: 5px;
+  font-size: clamp(0.875rem, 2vw, 1rem);
 }
 
 .password-input {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .password-toggle {
-  margin-left: -30px;
+  position: absolute;
+  right: 10px;
   cursor: pointer;
   color: #007bff;
+  padding: 5px;
 }
 
-.btn-submit {
+.btn-submitU {
   background-color: #007bff;
   color: white;
-  padding: 10px 20px;
+  padding: clamp(8px, 2vw, 10px) clamp(15px, 3vw, 20px);
   border: none;
   border-radius: 5px;
   cursor: pointer;
   width: 100%;
-  font-size: 1rem;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  transition: background-color 0.3s ease;
 }
 
-.btn-submit:hover {
+.btn-submitU:hover {
   background-color: #0056b3;
 }
 
-.error-message {
+.error-messageU {
   color: red;
-  font-size: 0.9rem;
+  font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+  margin-top: 5px;
 }
 
-.login-link {
+.login-linkU {
   color: #007bff;
   text-decoration: none;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  display: block;
+  text-align: center;
 }
 
-.login-link:hover {
+.login-linkU:hover {
   text-decoration: underline;
 }
 
-.logo-container {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  height: 100px;
-  width: 100px;
+.p-user-signup {
+  margin-top: 15px;
+  text-align: center;
 }
 
-.logo-container img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
+/* Media Queries */
+@media screen and (min-width: 480px) {
+  .signup-containerU {
+    padding: 20px;
+  }
+
+  .signup-formU {
+    padding: 25px;
+  }
+
+  .language-dropdown-container2 {
+    width: 175px;
+  }
 }
 
-.language-selector {
-  position: absolute;
-  top: 20px; /* Adjust this value to control the vertical position */
-  right: 20px; /* Adjust this value to control the horizontal position */
-  z-index: 1000; /* Ensure the dropdown appears above other elements */
-  display: flex;
-  align-items: center;
+@media screen and (min-width: 768px) {
+  .nav-logo-container2 img {
+    height: 100px;
+    width: 100px;
+  }
+
+  .signup-formU {
+    padding: 30px;
+    margin-top: 80px;
+  }
+
+  .language-dropdown-container2 {
+    width: 200px;
+  }
 }
 
-.language-selector label {
-  margin-right: 10px; /* Add some space between the label and the dropdown */
-  font-size: 14px; /* Adjust label font size */
-  color: #333; /* Adjust label text color */
+@media screen and (min-width: 1024px) {
+  .nav-logo-container2 img {
+    height: 120px;
+    width: 120px;
+  }
+
+  .signup-formU {
+    padding: 40px;
+  }
 }
 
-.language-selector select {
-  padding: 5px 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-  cursor: pointer;
-}
+/* Touch Device Optimizations */
+@media (hover: none) {
+  .btn-submitU {
+    padding: clamp(12px, 2.5vw, 15px) clamp(20px, 4vw, 25px); /* Larger touch target */
+  }
 
-.language-selector select:focus {
-  outline: none;
-  border-color: #007bff; /* Highlight border when focused */
+  .password-toggle {
+    padding: 8px; /* Larger touch target */
+  }
 }

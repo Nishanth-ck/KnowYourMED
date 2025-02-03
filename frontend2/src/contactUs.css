@@ -1,0 +1,223 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f8ff; /* Light blue background */
+  margin: 0;
+  padding: 0;
+}
+
+/* Header Styles */
+.navbar {
+  background-color: rgba(1, 14, 22, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 30px;
+  box-sizing: border-box;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar a:hover {
+  color: yellow;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Contact Us Container */
+.contact-us-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  padding-top: 120px; /* To offset the fixed navbar */
+}
+
+/* Header Title */
+.header {
+  text-align: center;
+  color: #003366; /* Deep blue */
+  margin-bottom: 40px;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+/* Section Titles */
+.sub-header {
+  color: #00509e; /* Bright blue */
+  margin-bottom: 30px;
+  font-size: 28px;
+  text-align: center;
+}
+
+/* Guide Section */
+.guide-section {
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.guide-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  width: 250px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.guide-photo {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.guide-name {
+  font-size: 20px;
+  color: #003366;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.guide-role {
+  color: #00509e;
+  font-size: 16px;
+}
+
+/* Team Section */
+.team-section {
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.team-cards {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.team-card {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  width: 200px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.team-photo {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.team-name {
+  font-size: 18px;
+  color: #003366;
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+.team-role {
+  color: #00509e;
+  font-size: 14px;
+}
+
+/* Feedback Section */
+.feedback-section {
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.feedback-form {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #003366;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: none;
+}
+
+.submit-button {
+  background-color: #00509e;
+  color: #ffffff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+}
+
+.submit-button:hover {
+  background-color: #003366;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar a {
+    padding: 15px 30px;
+    font-size: 18px;
+  }
+
+  .team-cards {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .feedback-form {
+    padding: 20px;
+  }
+
+  .guide-card,
+  .team-card {
+    width: 100%;
+    max-width: 300px;
+  }
+}

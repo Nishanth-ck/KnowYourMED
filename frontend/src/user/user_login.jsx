@@ -1,10 +1,61 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import "./styles/user_login.css"; // Import the external CSS file
 
-function UserLogin() {
+const UserLogin = () => {
+  // Check sessionStorage for the language, default to 'en' if not found
+  const [language, setLanguage] = useState(
+    sessionStorage.getItem("language") || "en"
+  );
+
+  useEffect(() => {
+    // Whenever the language changes, update the sessionStorage
+    sessionStorage.setItem("language", language);
+  }, [language]);
+
+  // Translations for different languages
+  const translations = {
+    en: {
+      languageLabel: "Language / ಭಾಷೆ :",
+      topLabel: "User Login",
+      Email: "Email",
+      passWord: "Password",
+      BtnVal: "Login",
+      LoginLink: "Don't have an account ?",
+      LoginLinkVal: "Register",
+      ForgotPassword: "Forgot Password ?",
+      RecoverPassword: "Recover Password",
+      namudisi: "",
+      enterVal: "Enter ",
+      LoginSuccess: "Login of the User has been successful",
+    },
+    kn: {
+      languageLabel: "ಭಾಷೆ / Language :",
+      topLabel: "ಬಳಕೆದಾರರ ಲಾಗಿನ್",
+      Email: "ಇಮೇಲ್",
+      passWord: "ಗುಪ್ತಪದ",
+      BtnVal: "ಲಾಗಿನ್",
+      LoginLink: "ಈಗಾಗಲೇ ಖಾತೆ ಹೊಂದಿಲ್ಲವೇ?",
+      LoginLinkVal: "ನೋಂದಣಿ",
+      ForgotPassword: "ಪಾಸ್ವರ್ಡ್ ಮರೆತಿರಾ ?",
+      RecoverPassword: "ಪಾಸ್ವರ್ಡ್ ಮರುಪಡೆಯಿರಿ",
+      namudisi: " ನಮೂದಿಸಿ",
+      enterVal: "",
+      LoginSuccess: "ಬಳಕೆದಾರರ ಲಾಗಿನ್ ಯಶಸ್ವಿಯಾಗಿದೆ",
+    },
+  };
+
+  // Function to handle language change
+  const handleLanguageChange = (e) => {
+    setLanguage(e.target.value);
+    // Refresh the page to reflect the changes
+    window.location.reload();
+  };
+
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -12,94 +63,6 @@ function UserLogin() {
     email: "",
     password: "",
   });
-  // const [translations, setTranslations] = useState({});
-  // const [selectedLanguage, setSelectedLanguage] = useState("en");
-
-  // Fetch the saved language from sessionStorage
-  // useEffect(() => {
-  //   const storedLanguage = sessionStorage.getItem("language");
-  //   if (storedLanguage) {
-  //     setSelectedLanguage(storedLanguage);
-  //   }
-  // }, []);
-
-  // Update sessionStorage and fetch translations on language change
-  // useEffect(() => {
-  //   sessionStorage.setItem("language", selectedLanguage);
-  //   fetchTranslations();
-  // }, [selectedLanguage]);
-
-  // const fetchTranslations = async () => {
-  //   const wordsToTranslate = [
-  //     "User Login",
-  //     "Email",
-  //     "Password",
-  //     "Login",
-  //     "Sign Up",
-  //     "Recover Password",
-  //     "Don't have an account?",
-  //     "Forgot password?",
-  //     "Please fill in all fields.",
-  //     "Login failed. Please try again.",
-  //     "An unexpected error occurred. Please try again later.",
-  //   ];
-
-  //   const translatedTexts = {};
-  //   for (const word of wordsToTranslate) {
-  //     try {
-  //       const response = await fetch("http://localhost:3000/translate/", {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({
-  //           text: word,
-  //           language: selectedLanguage,
-  //         }),
-  //       });
-
-  //       const result = await response.json();
-  //       if (response.ok) {
-  //         // Cleanup: Remove unwanted extra text if present
-  //         let translatedWord = result.translatedText;
-  //         if (translatedWord.includes("ಇದನ್ನು ಅನುವಾದಿಸಲಾಗುತ್ತಿದೆ")) {
-  //           translatedWord = translatedWord
-  //             .replace("ಇದನ್ನು ಅನುವಾದಿಸಲಾಗುತ್ತಿದೆ", "")
-  //             .trim();
-  //         }
-  //         translatedTexts[word] = translatedWord;
-  //       } else {
-  //         console.error(`Translation failed for word: ${word}`);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching translations:", error);
-  //     }
-  //   }
-
-  //   setTranslations({
-  //     loginTitle: translatedTexts["User Login"] || "User Login",
-  //     emailLabel: translatedTexts["Email"] || "Email",
-  //     passwordLabel: translatedTexts["Password"] || "Password",
-  //     loginButton: translatedTexts["Login"] || "Login",
-  //     signUpText: translatedTexts["Sign Up"] || "Sign Up",
-  //     recoverPasswordText:
-  //       translatedTexts["Recover Password"] || "Recover Password",
-  //     noAccountText:
-  //       translatedTexts["Don't have an account?"] || "Don't have an account?",
-  //     forgotPasswordText:
-  //       translatedTexts["Forgot password?"] || "Forgot password?",
-  //     errorFillFields:
-  //       translatedTexts["Please fill in all fields."] ||
-  //       "Please fill in all fields.",
-  //     errorLoginFailed:
-  //       translatedTexts["Login failed. Please try again."] ||
-  //       "Login failed. Please try again.",
-  //     errorUnexpected:
-  //       translatedTexts[
-  //         "An unexpected error occurred. Please try again later."
-  //       ] || "An unexpected error occurred. Please try again later.",
-  //   });
-  // };
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
@@ -136,8 +99,10 @@ function UserLogin() {
         sessionStorage.setItem("userId", result.response._id);
         sessionStorage.setItem("email", result.response.email);
 
-        alert("Login successful! Redirecting to home...");
-        navigate("/user/home");
+        toast.info(translations[language].LoginSuccess);
+        setTimeout(() => {
+          navigate("/user/home");
+        }, 3000);
       } else {
         setError(result.message);
       }
@@ -147,52 +112,63 @@ function UserLogin() {
     }
   };
 
-  // const handleLanguageChange = (e) => {
-  //   setSelectedLanguage(e.target.value);
-  // };
-
   return (
-    <div className="login-container">
-      {/* <div className="language-selector">
-        <label htmlFor="language">Language:</label>
-        <select
-          id="language"
-          value={selectedLanguage}
-          onChange={handleLanguageChange}
-        >
-          <option value="en">English</option>
-          <option value="kn">Kannada</option>
-        </select>
-      </div> */}
+    <div className="login-containerUL">
+      {/* Logo */}
+      <div className="nav-logo-container3">
+        <img src={"/logo3.jpg"} alt="KYM Logo" />
+      </div>
+      <div className="language-selector3">
+        <label htmlFor="language-dropdown2" style={{ color: "white" }}>
+          {translations[language].languageLabel}
+        </label>
+        <div className="language-dropdown-container3">
+          <select
+            id="language-dropdown3"
+            className="language-dropdown3"
+            value={language}
+            onChange={handleLanguageChange}
+          >
+            <option value="en">English</option>
+            <option value="kn">ಕನ್ನಡ</option>{" "}
+          </select>
+        </div>
+      </div>
 
-      <div className="login-content">
-        <div className="login-box">
-          <h2 className="login-title">User Login</h2>
+      <div className="login-contentUL">
+        <div className="login-boxUL">
+          <h2 className="login-titleUL">{translations[language].topLabel}</h2>
           <form>
-            <div className="mb-3">
-              <label htmlFor="email" className="form-label">
-                <strong>Email</strong>
+            <div className="form-groupUL">
+              <label htmlFor="email">
+                <strong>{translations[language].Email}</strong>
               </label>
               <input
                 type="email"
-                placeholder="Enter Email"
+                placeholder={
+                  translations[language].enterVal +
+                  translations[language].Email +
+                  translations[language].namudisi
+                }
                 name="email"
                 id="email"
-                className="form-control"
                 onChange={handleInputChange}
               />
             </div>
-            <div className="mb-3">
-              <label htmlFor="password" className="form-label">
-                <strong>Password</strong>
+            <div className="form-groupUL">
+              <label htmlFor="password">
+                <strong>{translations[language].passWord}</strong>
               </label>
-              <div className="position-relative">
+              <div className="password-input">
                 <input
                   type={showPassword ? "text" : "password"}
-                  placeholder="Enter Password"
+                  placeholder={
+                    translations[language].enterVal +
+                    translations[language].passWord +
+                    translations[language].namudisi
+                  }
                   name="password"
                   id="password"
-                  className="form-control"
                   onChange={handleInputChange}
                 />
                 <FontAwesomeIcon
@@ -204,32 +180,30 @@ function UserLogin() {
             </div>
             <button
               type="button"
-              className="btn btn-primary w-100 rounded-0"
+              className="btn-submitUL"
               onClick={handleSubmit}
             >
-              Login
+              {translations[language].BtnVal}
             </button>
           </form>
-          {error && <small className="text-danger">{error}</small>}
-          <p className="text-center mt-3">
-            Do not have an account?{" "}
-            <Link to="/signup/user" className="text-decoration-none">
-              Sign Up
+          {error && <small className="error-messageUL">{error}</small>}
+          <p className="p-user-login">
+            {translations[language].LoginLink}{" "}
+            <Link to="/signup/user" className="signup-linkUL">
+              {translations[language].LoginLinkVal}
             </Link>
           </p>
-          <p className="text-center">
-            Forgot password?{" "}
-            <Link to="/login/user/recover" className="text-decoration-none">
-              Recover Password
+          <p className="p-user-login">
+            {translations[language].ForgotPassword}{" "}
+            <Link to="/login/user/recover" className="signup-linkUL">
+              {translations[language].RecoverPassword}
             </Link>
           </p>
         </div>
       </div>
-      <div className="logo-container-user-login">
-        <img src="/logo3.jpg" alt="KYM Logo" className="logo-user-page" />
-      </div>
+      <ToastContainer />
     </div>
   );
-}
+};
 
 export default UserLogin;

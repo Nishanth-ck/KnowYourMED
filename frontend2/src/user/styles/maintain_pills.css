@@ -1,0 +1,162 @@
+/* Maintain Pills Container */
+.maintain-pills-container {
+  font-family: "Reem Kufi", sans-serif;
+  background-image: url("../../../public/img3.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  min-height: 100vh;
+  overflow: hidden; /* Prevent scrolling */
+  padding-top: 70px; /* Offset for fixed navbar */
+  display: flex;
+  justify-content: center;
+}
+
+/* Navbar */
+.navbar {
+  background-color: rgba(1, 14, 22, 0.7);
+  padding: 10px 30px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 500;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 15px 25px;
+  font-size: 18px;
+  transition: all 0.3s;
+}
+
+.nav-link:hover {
+  color: yellow;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+}
+
+/* Main Flexbox layout for Calendar and Form */
+.main-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+  max-width: 1200px; /* Max width for better centering */
+  width: 100%;
+}
+
+.col-md-6 {
+  flex: 1 1 45%; /* Ensure the columns take up 45% of space each */
+  margin: 0 10px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Calendar Styling */
+.react-calendar {
+  background-color: white; /* Change background color to white */
+  color: #333; /* Dark text color */
+  border-radius: 10px;
+  padding: 10px;
+  width: 100%;
+}
+
+.react-calendar__tile {
+  background-color: transparent;
+  color: #333; /* Dark text color */
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.react-calendar__tile:hover {
+  background-color: #007bff; /* Blue hover background */
+  color: white; /* Text color becomes white on hover */
+  transform: scale(1.1); /* Slightly scale the tile */
+}
+
+.react-calendar__tile--active {
+  background-color: #006edc; /* Active tile background color */
+  color: white;
+}
+
+.react-calendar__navigation button {
+  background-color: rgba(1, 14, 22, 0.7);
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.react-calendar__navigation button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.react-calendar__month-view__weekdays {
+  color: white;
+  font-weight: bold;
+}
+
+/* Form Styling */
+.form-control,
+.btn {
+  width: 100%;
+}
+
+.text-white {
+  color: white;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column; /* Stack columns vertically on smaller screens */
+  }
+
+  .col-md-6 {
+    width: 100%; /* Ensure columns take full width */
+    margin-bottom: 20px;
+  }
+}
+
+/* For Mobile Screens */
+@media (max-width: 480px) {
+  .react-calendar {
+    width: 100%;
+  }
+
+  .col-md-6 {
+    width: 100%;
+  }
+}
+
+.language-selector {
+  position: absolute;
+  top: 50px; /* Adjust this value to control the vertical position */
+  right: 20px; /* Adjust this value to control the horizontal position */
+  z-index: 1000; /* Ensure the dropdown appears above other elements */
+  display: flex;
+  align-items: center;
+}
+
+.language-selector label {
+  margin-right: 10px; /* Add some space between the label and the dropdown */
+  font-size: 14px; /* Adjust label font size */
+  color: #333; /* Adjust label text color */
+}
+
+.language-selector select {
+  padding: 5px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+.language-selector select:focus {
+  outline: none;
+  border-color: #007bff; /* Highlight border when focused */
+}

@@ -16,6 +16,7 @@ function UserLoginRecover() {
   const [translations, setTranslations] = useState({});
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [otpSent, setOtpSent] = useState(false);
+  const [otpReceivedFromBackend, setOtpReceivedFromBackend] = useState(false);
   const [otpVerified, setOtpVerified] = useState(false);
 
   // Fetch the saved language from sessionStorage
@@ -139,16 +140,18 @@ function UserLoginRecover() {
       );
 
       const result = await response.json();
-      if (response.ok) {
-        setOtpSent(true);
-        alert(translations.errorOtpSent || "OTP sent to your email!");
-      } else {
-        setError(
-          result.error ||
-            translations.errorOtpSent ||
-            "Failed to send OTP. Please try again."
-        );
-      }
+      console.log(result.otp);
+
+      // if (response.ok) {
+      //   setOtpSent(true);
+      //   alert(translations.errorOtpSent || "OTP sent to your email!");
+      // } else {
+      //   setError(
+      //     result.error ||
+      //       translations.errorOtpSent ||
+      //       "Failed to send OTP. Please try again."
+      //   );
+      // }
     } catch {
       setError(
         translations.errorGeneral || "An error occurred. Please try again."

@@ -1,107 +1,184 @@
-.login-container {
+/* Base styles */
+.login-containerUL {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-image: url("/img5.png");
+  background-image: url("/img1.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  padding: 20px;
 }
 
-.logo-user-page {
-  width: 160px;
+.nav-logo-container3 {
+  position: absolute;
+  top: 10px;
+  left: 10px;
   border-radius: 50%;
-  margin: 10px;
+  z-index: 2;
 }
 
-.login-content {
+.nav-logo-container3 img {
+  border-radius: 50%;
+  height: 120px;
+  width: 120px;
+  transition: all 0.3s ease;
+}
+
+.language-selector3 {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+}
+
+.language-dropdown-container3 {
+  width: 150px;
+  max-width: 100%;
+}
+
+.language-dropdown3 {
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  padding: 0.5rem;
+  width: 100%;
+  background-color: white;
+}
+
+.login-contentUL {
   width: 100%;
   max-width: 400px;
   padding: 20px;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
 }
 
-.login-box {
+.login-boxUL {
   text-align: center;
 }
 
-.login-title {
-  font-size: 2rem;
+.login-titleUL {
+  font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: bold;
   color: #007bff;
   margin-bottom: 20px;
 }
 
-.login-logo {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
+.form-groupUL {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+}
+
+input {
+  width: 100%;
+  padding: clamp(8px, 2vw, 10px);
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+}
+
+.password-input {
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .password-toggle {
   position: absolute;
-  top: 50%;
   right: 10px;
-  transform: translateY(-50%);
   cursor: pointer;
   color: #007bff;
+  padding: 5px;
 }
 
-/* .logo-container {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  height: 100px;
-  width: 100px;
-} */
-
-/* .logo-container img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-} */
-
-.language-selector {
-  position: absolute;
-  top: 20px; /* Adjust this value to control the vertical position */
-  right: 20px; /* Adjust this value to control the horizontal position */
-  z-index: 1000; /* Ensure the dropdown appears above other elements */
-  display: flex;
-  align-items: center;
-}
-
-.language-selector label {
-  margin-right: 10px; /* Add some space between the label and the dropdown */
-  font-size: 14px; /* Adjust label font size */
-  color: #333; /* Adjust label text color */
-}
-
-.language-selector select {
-  padding: 5px 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
+.btn-submitUL {
+  background-color: #007bff;
+  color: white;
+  padding: clamp(8px, 2vw, 10px) clamp(15px, 3vw, 20px);
+  border: none;
   border-radius: 5px;
-  background-color: #f9f9f9;
   cursor: pointer;
+  width: 100%;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  transition: background-color 0.3s ease;
 }
 
-.language-selector select:focus {
-  outline: none;
-  border-color: #007bff; /* Highlight border when focused */
+.btn-submitUL:hover {
+  background-color: #0056b3;
 }
 
-.logo-container-user-login {
-  position: absolute;
-  height: 150px;
-  width: 150px;
-  top: 10px;
-  left: 10px;
-  z-index: 1000;
-  border-radius: 50%;
+.error-messageUL {
+  color: red;
+  font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+  margin-top: 5px;
+}
+
+.signup-linkUL {
+  color: #007bff;
+  text-decoration: none;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  display: block;
+  text-align: center;
+}
+
+.signup-linkUL:hover {
+  text-decoration: underline;
+}
+
+.p-user-login {
+  margin-top: 15px;
+  text-align: center;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  .nav-logo-container3 img {
+    height: 80px;
+    width: 80px;
+  }
+
+  .language-dropdown-container3 {
+    width: 120px;
+  }
+
+  .login-contentUL {
+    padding: 15px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .nav-logo-container3 {
+    position: relative;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .nav-logo-container3 img {
+    height: 60px;
+    width: 60px;
+  }
+
+  .language-selector3 {
+    position: relative;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .language-dropdown-container3 {
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+  }
+
+  .login-contentUL {
+    padding: 10px;
+  }
 }

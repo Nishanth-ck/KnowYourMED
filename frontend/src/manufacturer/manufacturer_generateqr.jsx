@@ -1,9 +1,60 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./styles/manufacturer_generateqr.css"; // Import the CSS file
 
 const GenerateQR = () => {
+  // Check sessionStorage for the language, default to 'en' if not found
+  const [language, setLanguage] = useState(
+    sessionStorage.getItem("language") || "en"
+  );
+
+  // Translations for different languages
+  const translations = {
+    en: {
+      HomeNav: "Home",
+      ContactUsNav: "Contact Us",
+      LogOut: "Logout",
+      Titlelbl: "Generate QR Code",
+      MedicineName: "Medicine Name",
+      ExpiryDate: "Expiry Date",
+      ManufactureDate: "Manufacture Date",
+      BatchNumber: "Batch Number",
+      ManufacturerName: "Manufacturer",
+      GenerateQRBtn: "Generate QR",
+      DownloadQRBtn: "Download QR",
+      namudisi: "",
+      enterVal: "Enter ",
+      alert1: "Please fill in all the details",
+      alert2: "Failed to generate the qr code...Please try again...",
+      alert3: "Please generate a QR code first...",
+      alert4: "QR code generated successfully...",
+      LogoutToast: "You have been logged out",
+    },
+    kn: {
+      HomeNav: "ಹೋಮ್",
+      ContactUsNav: "ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ",
+      LogOut: "ಲಾಗ್ ಔಟ್",
+      Titlelbl: "QR ಕೋಡ್ ರಚಿಸಿ",
+      MedicineName: "ಔಷಧಿ ಹೆಸರು",
+      ExpiryDate: "ಗಡುವು ದಿನಾಂಕ",
+      ManufactureDate: "ತಯಾರಿಸಿದ ದಿನಾಂಕ",
+      BatchNumber: "ಬ್ಯಾಚ್ ಸಂಖ್ಯೆ",
+      ManufacturerName: "ತಯಾರಕರ ಹೆಸರು",
+      GenerateQRBtn: "QR ರಚಿಸಿ",
+      DownloadQRBtn: "QR ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ",
+      namudisi: " ನಮೂದಿಸಿ",
+      enterVal: "",
+      alert1: "ದಯವಿಟ್ಟು ಎಲ್ಲಾ ವಿವರಗಳನ್ನು ಭರ್ತಿ ಮಾಡಿ",
+      alert2: "QR ಕೋಡ್ ರಚಿಸಲು ವಿಫಲವಾಗಿದೆ... ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ...",
+      alert3: "ದಯವಿಟ್ಟು ಮೊದಲು QR ಕೋಡ್ ರಚಿಸಿ...",
+      alert4: "QR ಕೋಡ್ ಯಶಸ್ವಿಯಾಗಿ ರಚಿಸಲಾಗಿದೆ...",
+      LogoutToast: "ನೀವು ಲಾಗ್ ಔಟ್ ಆಗಿದ್ದೀರಿ",
+    },
+  };
+
   const [formData, setFormData] = useState({
     medicine_name: "",
     expiry_date: "",
@@ -40,7 +91,7 @@ const GenerateQR = () => {
       !batch_number ||
       !manufacture_name
     ) {
-      alert("Please fill in all fields to generate a QR code.");
+      toast.info(translations[language].alert1);
       return;
     }
 
@@ -52,16 +103,17 @@ const GenerateQR = () => {
         newData
       );
       console.log("QR Code generated:", response.data.qrCode);
+      toast.success(translations[language].alert4);
       setQrCode(response.data.qrCode);
     } catch (error) {
       console.error("Error generating QR Code:", error);
-      alert("Failed to generate QR code. Please try again.");
+      toast.info(translations[language].alert2);
     }
   };
 
   const handleDownload = () => {
     if (!qrCode) {
-      alert("Please generate a QR code first.");
+      toast.info(translations[language].alert3);
       return;
     }
 
@@ -71,70 +123,143 @@ const GenerateQR = () => {
     link.click();
   };
 
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    // Remove the session storage items
+    sessionStorage.removeItem("userName");
+    sessionStorage.removeItem("userToken");
+    sessionStorage.removeItem("userId");
+    sessionStorage.removeItem("email");
+    sessionStorage.removeItem("language");
+    toast.info(translations[language].LogoutToast),
+      {
+        autoClose: 5000, // Toast will stay for 10 seconds
+      };
+    setTimeout(() => {
+      navigate("/home");
+    }, 5000);
+  };
+
   return (
     <div className="qr-code-generator-container">
-      {/* Navbar */}
-      <div className="navbar">
-        <Link to="/contactus" className="nav-link">
-          Contact Us
-        </Link>
-        <Link to="/logout" className="nav-link">
-          Logout
-        </Link>
+      <div className="generateqr-manufacturer-navbar">
+        {/* Logo */}
+        <div className="nav-logo-container12">
+          <img src={"/logo3.jpg"} alt="KYM Logo" />
+        </div>
+        <div className="nav-links-container-generateqr">
+          <Link
+            to="/manufacturer/home"
+            className="nav-linkVal-container-generateqr"
+          >
+            {translations[language].HomeNav}
+          </Link>
+          <Link to="/contactus" className="nav-linkVal-container-generateqr">
+            {translations[language].ContactUsNav}
+          </Link>
+          <Link
+            className="nav-linkVal-container-generateqr"
+            onClick={handleLogout}
+          >
+            {translations[language].LogOut}
+          </Link>
+        </div>
       </div>
 
       {/* Main Content */}
-      <div className="main-content">
-        <div className="content-container">
-          <h1 className="title">Generate QR Code</h1>
+      <div className="main-content-generateqr">
+        <div className="content-container-generateqr">
+          <h1 className="title-generateqr">
+            {translations[language].Titlelbl}
+          </h1>
 
           {/* Form for QR Code Generation */}
-          <form className="form-container">
+          <form className="form-container-generateqr">
             {[
-              { name: "medicine_name", label: "Medicine Name" },
-              { name: "expiry_date", label: "Expiry Date", type: "date" },
+              {
+                name: "medicine_name",
+                label: translations[language].MedicineName,
+                placeholder:
+                  translations[language].enterVal +
+                  translations[language].MedicineName +
+                  translations[language].namudisi,
+              },
               {
                 name: "manufacture_date",
-                label: "Manufacture Date",
+                label: translations[language].ManufactureDate,
                 type: "date",
+                placeholder:
+                  translations[language].enterVal +
+                  translations[language].ManufactureDateDate +
+                  translations[language].namudisi,
               },
-              { name: "batch_number", label: "Batch Number" },
-              { name: "manufacture_name", label: "Manufacturer Name" },
-            ].map(({ name, label, type = "text" }) => (
+              {
+                name: "expiry_date",
+                label: translations[language].ExpiryDate,
+                type: "date",
+                placeholder:
+                  translations[language].enterVal +
+                  translations[language].ExpiryDate +
+                  translations[language].namudisi,
+              },
+              {
+                name: "batch_number",
+                label: translations[language].BatchNumber,
+                placeholder:
+                  translations[language].enterVal +
+                  translations[language].BatchNumber +
+                  translations[language].namudisi,
+              },
+              {
+                name: "manufacture_name",
+                label: translations[language].ManufacturerName,
+                placeholder:
+                  translations[language].enterVal +
+                  translations[language].ManufacturerName +
+                  translations[language].namudisi,
+              },
+            ].map(({ name, label, type = "text", placeholder }) => (
               <div key={name}>
-                <label className="form-label">{label}</label>
+                <label className="form-label-generateqr">{label}</label>
                 <input
                   type={type}
                   name={name}
                   value={formData[name]}
                   onChange={handleInputChange}
-                  className="form-input"
+                  className="form-input-generateqr"
+                  placeholder={placeholder}
                 />
               </div>
             ))}
           </form>
 
           {/* Generate QR Code Button */}
-          <button onClick={handleGenerate} className="generate-button">
-            Generate QR Code
+          <button
+            onClick={handleGenerate}
+            className="generate-button-generateqr"
+          >
+            {translations[language].GenerateQRBtn}
           </button>
 
           {/* Display QR code */}
           {qrCode && (
-            <div className="qr-code-container">
-              <img src={qrCode} alt="Generated QR Code" className="qr-code" />
-              <button onClick={handleDownload} className="download-button">
-                Download QR Code
+            <div className="qr-code-container-generateqr">
+              <img
+                src={qrCode}
+                alt="Generated QR Code"
+                className="qr-code-generateqr"
+              />
+              <button
+                onClick={handleDownload}
+                className="download-button-generateqr"
+              >
+                {translations[language].DownloadQRBtn}
               </button>
             </div>
           )}
         </div>
       </div>
-
-      {/* Logo */}
-      <div className="logo-container-user-login">
-        <img src="/logo3.jpg" alt="KYM Logo" className="logo-user-page" />
-      </div>
+      <ToastContainer />
     </div>
   );
 };

@@ -1,0 +1,107 @@
+/* Basic reset and global styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+/* Container for the entire page */
+.scan-container {
+  padding: 20px;
+  max-width: 900px;
+  margin: 120px 0px 0px 250px;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Navbar Styles */
+.navbar {
+  display: flex;
+  /* justify-content: space-between; */
+  padding: 10px 0;
+  border-bottom: none;
+}
+
+.nav-link {
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 0 10px;
+}
+
+.nav-link:hover {
+  color: #007bff;
+}
+
+/* Logo Styles */
+.logo-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.logo {
+  max-width: 150px;
+  height: auto;
+}
+
+/* Error message */
+.error-text {
+  color: red;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Medicine Info card */
+.medicine-card {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  width: 70%;
+  /* margin: 100px 0px; */
+}
+
+.medicine-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.medicine-detail {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.detail-label {
+  font-weight: bold;
+  color: #555;
+}
+
+.detail-value {
+  color: #333;
+}
+
+.medicine-detail:last-child {
+  border-bottom: none;
+}
+
+/* Loading message */
+.loading-text {
+  text-align: center;
+  font-size: 18px;
+  color: #555;
+}

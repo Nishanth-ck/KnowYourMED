@@ -1,0 +1,196 @@
+.scanqr-container {
+  display: flex;
+  background-image: url("/img5.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  padding-top: max(140px, 10vh);
+  flex-wrap: wrap;
+  background-color: #e6f7ff;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.scanqr-navbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 2;
+  box-sizing: border-box;
+  padding: clamp(5px, 2vw, 10px);
+  margin: 0;
+}
+
+.nav-logo-container8 {
+  position: absolute;
+  top: clamp(5px, 2vh, 10px);
+  left: clamp(5px, 2vw, 10px);
+  border-radius: 50%;
+  z-index: 3;
+}
+
+.nav-logo-container8 img {
+  border-radius: 50%;
+  height: clamp(40px, 6vw, 100px);
+  width: clamp(40px, 6vw, 100px);
+  transition: all 0.3s ease;
+}
+
+.nav-links-container-scanqr {
+  display: flex;
+  align-items: center;
+  gap: clamp(3px, 1vw, 10px);
+  z-index: 3;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 clamp(10px, 3vw, 30px);
+}
+
+.nav-linkVal-container-scanqr {
+  text-decoration: none;
+  color: rgb(108, 183, 206);
+  padding: clamp(6px, 1.2vw, 15px);
+  font-size: clamp(12px, 1.8vw, 20px);
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.nav-linkVal-container-scanqr:hover {
+  color: yellow;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.h1-scanqr {
+  color: #000000;
+  font-size: clamp(24px, 4vw, 35px);
+  margin-bottom: clamp(10px, 2vw, 20px);
+  font-weight: 900;
+  text-align: center;
+}
+
+.h2-scanqr {
+  color: rgb(54, 175, 212);
+  font-size: clamp(18px, 3vw, 25px);
+  margin-bottom: clamp(10px, 2vw, 20px);
+  font-weight: 800;
+}
+
+.h4-scanqr {
+  color: #000;
+  font-size: clamp(16px, 2.5vw, 20px);
+  margin-bottom: clamp(10px, 2vw, 20px);
+  margin-top: clamp(10px, 2vw, 20px);
+  font-weight: 700;
+}
+
+.scanner-card {
+  background-color: rgba(255, 255, 255, 0.22);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: min(48%, 600px);
+  padding: clamp(10px, 2vw, 20px);
+  text-align: center;
+  box-sizing: border-box;
+  border: 1px solid #cce0ff;
+  min-height: 100px;
+  margin: 10px 0;
+}
+
+input[type="file"] {
+  display: block;
+  margin-top: clamp(10px, 2vw, 20px);
+  padding: clamp(8px, 1.5vw, 12px);
+  border-radius: 5px;
+  border: 1px solid #cce0ff;
+  background-color: #f0f9ff34;
+  color: #000;
+  font-size: clamp(14px, 1.8vw, 16px);
+  width: 100%;
+  box-sizing: border-box;
+  min-height: clamp(200px, 30vh, 300px);
+}
+
+.p-scanqr {
+  margin-top: clamp(10px, 1.5vw, 15px);
+  font-size: clamp(14px, 1.8vw, 16px);
+  color: #000000;
+  font-weight: 500;
+}
+
+.img {
+  margin-top: clamp(10px, 2vw, 20px);
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+.goto-button-scanqr {
+  background-color: #33b12f;
+  color: white;
+  font-size: clamp(14px, 1.8vw, 16px);
+  padding: clamp(8px, 1.5vw, 10px) clamp(15px, 2vw, 20px);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: clamp(10px, 2vw, 20px);
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.goto-button-scanqr:hover {
+  background-color: #0ff32d;
+}
+
+.info-box-scanqr {
+  text-align: center;
+  margin: clamp(25px, 5vh, 50px) auto;
+  padding: clamp(10px, 2vw, 20px);
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  max-width: min(90%, 600px);
+  background-color: #f9f9f9;
+}
+
+.info-box-scanqr p {
+  font-size: clamp(14px, 2vw, 18px);
+  margin: clamp(10px, 2vw, 20px) 0;
+  color: #1511f0;
+}
+
+@media screen and (max-width: 768px) {
+  .scanner-card {
+    width: 95%;
+    margin: 10px auto;
+  }
+
+  .nav-links-container-scanqr {
+    justify-content: flex-end;
+  }
+
+  .scanqr-container {
+    padding-top: max(100px, 8vh);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .nav-logo-container8 img {
+    height: clamp(30px, 5vw, 40px);
+    width: clamp(30px, 5vw, 40px);
+  }
+
+  .nav-linkVal-container-scanqr {
+    padding: clamp(4px, 1vw, 8px);
+    font-size: clamp(10px, 1.5vw, 14px);
+  }
+}

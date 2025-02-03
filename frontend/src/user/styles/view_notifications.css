@@ -1,254 +1,152 @@
-body {
-  font-family: Arial, sans-serif;
-}
-
-/* Navbar */
-.navbar {
-  background-color: rgba(1, 14, 22, 0.7);
-  padding: 20px;
-  position: fixed;
-  width: 100%;
-  height: 80px;
-  top: 0;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  z-index: 500;
-  box-sizing: border-box;
-}
-
-.nav-link {
-  color: white;
-  text-decoration: none;
-  padding: 15px 25px;
-  font-size: 18px;
-  transition: all 0.3s;
-}
-
-.nav-link:hover {
-  color: yellow;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 5px;
-}
-
-/* Logo Container */
-.logo-container {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  height: 100px;
-  width: 100px;
-}
-
-.logo-container img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-}
-
-/* Main Content Background */
-.d-flex {
-  background-image: url("../../../public/img4.png");
+.view-user-notifications-container {
+  font-family: "Reem Kufi", sans-serif;
+  margin: 0;
+  padding: clamp(10px, 3vw, 30px);
+  background-image: url("/img5.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 100vh;
-  margin-top: 70px;
-}
-
-/* Heading Styles */
-h3 {
-  color: white;
-  font-weight: 2em;
-  font-size: 80px;
-  text-align: center;
-  margin-top: 0;
-}
-
-/* Card Styling */
-.custom-card {
-  background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
-  color: white; /* White text */
-  border: none;
-  border-radius: 10px;
-  transition: all 0.3s ease; /* Smooth transition for hover effects */
-}
-
-.custom-card:hover {
-  transform: scale(1.05); /* Slight zoom effect */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
-}
-
-/* Card Title */
-.custom-card .card-title {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-  background-color: white;
-  color: black;
-  padding: 10px;
-  text-align: center;
-}
-
-/* Card Text */
-.custom-card .card-text {
-  font-size: 1rem;
-  margin-bottom: 10px;
-}
-
-/* Card Body Padding */
-/* .card-body {
-  padding: 20px;
-} */
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-  .col-md-4 {
-    width: 100%; /* Cards will take full width on smaller screens */
-  }
-}
-
-/* Navbar Styles */
-.navbar {
-  background-color: rgba(1, 14, 22, 0.7);
-  padding: 10px 30px;
-  position: fixed;
   width: 100%;
-  top: 0;
+  overflow-x: hidden;
+}
+
+.user-viewnotifications-navbar {
   display: flex;
   justify-content: flex-end;
-  z-index: 500;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0; /* Explicitly set left to 0 */
+  right: 0; /* Explicitly set right to 0 */
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 2;
+  box-sizing: border-box;
+  padding: clamp(5px, 2vw, 10px);
+  margin: 0; /* Remove any default margins */
 }
 
-/* Navbar Link Styling */
-.nav-link {
-  color: white;
+.nav-logo-container6 {
+  position: absolute;
+  top: clamp(5px, 2vh, 10px);
+  left: clamp(5px, 2vw, 10px);
+  border-radius: 50%;
+  z-index: 3;
+}
+
+.nav-logo-container6 img {
+  border-radius: 50%;
+  height: clamp(60px, 8vw, 140px);
+  width: clamp(60px, 8vw, 140px);
+  transition: all 0.3s ease;
+}
+
+.nav-links-container-viewnotifications {
+  display: flex;
+  align-items: center;
+  gap: clamp(3px, 1vw, 10px);
+  z-index: 3;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 clamp(10px, 3vw, 30px);
+}
+
+.nav-linkVal-container-viewnotifications {
   text-decoration: none;
-  padding: 15px 25px;
-  font-size: 18px;
-  transition: all 0.3s;
-}
-
-.nav-link:hover {
-  color: yellow;
-  background-color: rgba(255, 255, 255, 0.2);
+  color: rgb(108, 183, 206);
+  padding: clamp(6px, 1.2vw, 15px);
+  font-size: clamp(14px, 2vw, 25px);
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+  display: inline-flex;
+  align-items: center;
   border-radius: 5px;
 }
 
-/* Logo Container */
-.logo-container {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  height: 100px;
-  width: 100px;
+.nav-linkVal-container-viewnotifications:hover {
+  color: yellow;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
-.logo-container img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-}
-
-/* Container for the Previous QR Codes Section */
-.previous-qr-codes-container {
-  margin-top: 120px; /* Space to avoid overlap with navbar */
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.h3-style-viewnotifications {
+  color: black;
+  font-size: clamp(30px, 5vw, 50px);
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: clamp(25px, 5vh, 50px);
+  padding: 0 clamp(10px, 3vw, 30px);
+  margin-top: clamp(25px, 5vh, 50px);
 }
 
 /* Card Styling */
-.custom-card {
-  background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
-  color: white; /* White text */
+.custom-card-viewnotifications {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
   border: none;
   border-radius: 10px;
-  transition: all 0.3s ease; /* Smooth transition for hover effects */
+  transition: all 0.3s ease;
+  margin: clamp(10px, 2vw, 20px);
+  width: clamp(280px, calc(100% - 40px), 600px);
+  max-width: 100%;
 }
 
-.custom-card:hover {
-  transform: scale(1.05); /* Slight zoom effect */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
+.custom-card-viewnotifications:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* Card Title */
-.custom-card .card-title {
-  font-size: 1.25rem;
-  font-weight: bold;
+.custom-card-viewnotifications .card-title-viewnotifications {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  font-weight: 900;
   margin-bottom: 10px;
+  background-color: white;
+  color: rgb(108, 183, 206);
+  padding: clamp(8px, 2vw, 10px);
+  text-align: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  text-transform: uppercase;
 }
 
 /* Card Text */
-.custom-card .card-text {
-  font-size: 1rem;
-  margin-bottom: 10px;
+.custom-card-viewnotifications .card-text-viewnotifications {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  font-weight: 800;
+  margin: clamp(8px, 2vw, 10px);
+  margin-bottom: clamp(8px, 2vw, 10px);
 }
 
-/* Card Body Padding */
-/* .card-body { */
-/* padding: 20px; */
-/* } */
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  .user-viewnotifications-navbar {
+    justify-content: center;
+    padding: 5px;
+  }
 
-/* Button Styling */
-.btn-info {
-  background-color: #17a2b8;
-  color: white;
-  border-radius: 5px;
-  padding: 10px 15px;
-  transition: background-color 0.3s;
-}
+  .nav-links-container-viewnotifications {
+    justify-content: flex-end;
+    padding: 0 5px;
+  }
 
-.btn-info:hover {
-  background-color: #138496;
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-  .col-md-4 {
-    width: 100%; /* Cards will take full width on smaller screens */
+  .custom-card-viewnotifications {
+    margin: 10px auto;
+    width: calc(100% - 20px);
   }
 }
 
-/* Card Styling */
-.custom-card {
-  background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
-  color: white; /* White text */
-  border: none;
-  border-radius: 10px;
-  transition: all 0.3s ease; /* Smooth transition for hover effects */
-}
+@media screen and (max-width: 480px) {
+  .nav-links-container-viewnotifications {
+    gap: 5px;
+  }
 
-.custom-card:hover {
-  transform: scale(1.05); /* Slight zoom effect */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
-}
+  .nav-linkVal-container-viewnotifications {
+    padding: 4px 8px;
+    font-size: clamp(12px, 4vw, 16px);
+  }
 
-/* Card Title */
-.custom-card .card-title {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-  background-color: white;
-  color: black;
-  padding: 10px;
-  text-align: center;
-}
-
-/* Card Text */
-.custom-card .card-text {
-  font-size: 1rem;
-  color: white;
-  margin-bottom: 10px;
-  text-align: left;
-}
-
-/* Card Body Padding
-.card-body {
-  padding: px;
-} */
-
-.card-body {
-  padding: 0px;
+  .custom-card-viewnotifications:hover {
+    transform: none;
+  }
 }

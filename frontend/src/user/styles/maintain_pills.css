@@ -1,162 +1,222 @@
-/* Maintain Pills Container */
 .maintain-pills-container {
   font-family: "Reem Kufi", sans-serif;
-  background-image: url("../../../public/img3.png");
+  background-image: url("/img3.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   height: 100%;
   min-height: 100vh;
-  overflow: hidden; /* Prevent scrolling */
-  padding-top: 70px; /* Offset for fixed navbar */
+  overflow: hidden;
+  padding-top: max(70px, 10vh);
   display: flex;
   justify-content: center;
 }
 
-/* Navbar */
-.navbar {
-  background-color: rgba(1, 14, 22, 0.7);
-  padding: 10px 30px;
-  position: fixed;
-  width: 100%;
-  top: 0;
+.maintain-pills-navbar {
   display: flex;
   justify-content: flex-end;
-  z-index: 500;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 2;
+  box-sizing: border-box;
+  padding: 10px;
 }
 
-.nav-link {
-  color: white;
+.nav-logo-container5 {
+  position: absolute;
+  top: clamp(5px, 2vh, 10px);
+  left: clamp(5px, 2vw, 10px);
+  border-radius: 50%;
+  z-index: 3;
+}
+
+.nav-logo-container5 img {
+  border-radius: 50%;
+  height: clamp(60px, 8vw, 140px);
+  width: clamp(60px, 8vw, 140px);
+  transition: all 0.3s ease;
+}
+
+.nav-links-container-maintainpills {
+  display: flex;
+  align-items: center;
+  gap: clamp(3px, 1vw, 10px);
+  z-index: 3;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 clamp(10px, 3vw, 30px);
+}
+
+.nav-linkVal-container-maintainpills {
   text-decoration: none;
-  padding: 15px 25px;
-  font-size: 18px;
-  transition: all 0.3s;
-}
-
-.nav-link:hover {
-  color: yellow;
-  background-color: rgba(255, 255, 255, 0.2);
+  color: rgb(108, 183, 206);
+  padding: clamp(6px, 1.2vw, 15px);
+  font-size: clamp(14px, 2vw, 25px);
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+  display: inline-flex;
+  align-items: center;
   border-radius: 5px;
 }
 
-/* Main Flexbox layout for Calendar and Form */
-.main-content {
+.nav-linkVal-container-maintainpills:hover {
+  color: yellow;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.main-content-maintainpills {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 20px;
-  max-width: 1200px; /* Max width for better centering */
+  padding: clamp(10px, 2vw, 20px);
+  max-width: 1200px;
   width: 100%;
+  gap: 20px;
 }
 
-.col-md-6 {
-  flex: 1 1 45%; /* Ensure the columns take up 45% of space each */
-  margin: 0 10px;
-  padding: 20px;
+.column1-maintainpills {
+  flex: 1 1 300px;
+  min-width: 300px;
+  margin: 0 clamp(5px, 1vw, 10px);
+  padding: clamp(10px, 2vw, 20px);
   box-sizing: border-box;
 }
 
-/* Calendar Styling */
-.react-calendar {
-  background-color: white; /* Change background color to white */
-  color: #333; /* Dark text color */
-  border-radius: 10px;
-  padding: 10px;
-  width: 100%;
+.date-text-maintainpills {
+  color: black;
+  font-size: clamp(24px, 4vw, 40px);
+  font-weight: 800;
 }
 
-.react-calendar__tile {
-  background-color: transparent;
-  color: #333; /* Dark text color */
-  border-radius: 5px;
-  transition: background-color 0.3s, transform 0.2s;
+.label-txt-maintainpills {
+  color: black;
+  font-size: clamp(12px, 1.5vw, 15px);
+  font-weight: 900;
 }
 
-.react-calendar__tile:hover {
-  background-color: #007bff; /* Blue hover background */
-  color: white; /* Text color becomes white on hover */
-  transform: scale(1.1); /* Slightly scale the tile */
-}
-
-.react-calendar__tile--active {
-  background-color: #006edc; /* Active tile background color */
-  color: white;
-}
-
-.react-calendar__navigation button {
-  background-color: rgba(1, 14, 22, 0.7);
-  color: white;
-  border: none;
-  border-radius: 5px;
-}
-
-.react-calendar__navigation button:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+.react-calendar__navigation__label__labelText {
+  color: blue;
+  font-weight: 900;
+  font-size: clamp(14px, 1.8vw, 18px);
 }
 
 .react-calendar__month-view__weekdays {
-  color: white;
-  font-weight: bold;
+  color: blue;
+  font-size: clamp(12px, 1.5vw, 16px);
 }
-
-/* Form Styling */
-.form-control,
-.btn {
+/* Style for the task list container */
+.ul-maintainpills {
+  list-style-type: none;
+  padding: 0;
+  margin: clamp(10px, 2vw, 20px) 0;
   width: 100%;
 }
 
-.text-white {
-  color: white;
-}
-
-/* Media Queries for responsiveness */
-@media (max-width: 768px) {
-  .main-content {
-    flex-direction: column; /* Stack columns vertically on smaller screens */
-  }
-
-  .col-md-6 {
-    width: 100%; /* Ensure columns take full width */
-    margin-bottom: 20px;
-  }
-}
-
-/* For Mobile Screens */
-@media (max-width: 480px) {
-  .react-calendar {
-    width: 100%;
-  }
-
-  .col-md-6 {
-    width: 100%;
-  }
-}
-
-.language-selector {
-  position: absolute;
-  top: 50px; /* Adjust this value to control the vertical position */
-  right: 20px; /* Adjust this value to control the horizontal position */
-  z-index: 1000; /* Ensure the dropdown appears above other elements */
+/* Each task item */
+.ul-maintainpills li {
+  background: #f8f9fa;
+  padding: clamp(10px, 2vw, 15px);
+  margin-bottom: clamp(8px, 1.5vw, 10px);
+  border-radius: 8px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(5px, 1vw, 10px);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-left: 5px solid #007bff;
+  transition: transform 0.2s ease-in-out;
 }
 
-.language-selector label {
-  margin-right: 10px; /* Add some space between the label and the dropdown */
-  font-size: 14px; /* Adjust label font size */
-  color: #333; /* Adjust label text color */
+/* Hover effect */
+.ul-maintainpills li:hover {
+  transform: scale(1.02);
+  background: #eef2f7;
 }
 
-.language-selector select {
-  padding: 5px 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+/* Task details */
+.ul-maintainpills li span {
+  font-size: clamp(14px, 1.8vw, 16px);
+  color: #333;
+  flex: 1;
+  min-width: min(200px, 100%);
+}
+
+/* Notify text styling */
+.ul-maintainpills li span span {
+  color: #28a745;
+  font-weight: bold;
+}
+
+/* Delete button */
+.ul-maintainpills li button {
+  padding: clamp(6px, 1vw, 12px);
+  font-size: clamp(12px, 1.5vw, 14px);
+  border: none;
   cursor: pointer;
+  border-radius: 5px;
+  background-color: #dc3545;
+  color: white;
+  white-space: nowrap;
 }
 
-.language-selector select:focus {
-  outline: none;
-  border-color: #007bff; /* Highlight border when focused */
+/* Media Queries for better responsiveness */
+@media screen and (max-width: 768px) {
+  .maintain-pills-navbar {
+    padding: 5px;
+  }
+
+  .nav-links-container-maintainpills {
+    justify-content: flex-end;
+  }
+
+  .main-content-maintainpills {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .column1-maintainpills {
+    margin: 10p x 0;
+  }
+
+  .ul-maintainpills li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ul-maintainpills li span {
+    margin-bottom: 8px;
+    width: 100%;
+  }
+
+  .ul-maintainpills li button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .nav-links-container-maintainpills {
+    gap: 5px;
+  }
+
+  .nav-linkVal-container-maintainpills {
+    padding: 5px;
+    font-size: clamp(12px, 4vw, 16px);
+  }
+
+  .ul-maintainpills li {
+    padding: clamp(8px, 1.5vw, 12px);
+  }
+
+  .ul-maintainpills li span {
+    font-size: clamp(13px, 3.5vw, 15px);
+  }
+
+  .ul-maintainpills li button {
+    font-size: clamp(11px, 3vw, 13px);
+  }
 }

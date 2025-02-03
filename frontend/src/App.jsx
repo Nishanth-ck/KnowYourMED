@@ -14,7 +14,7 @@ import ManufacturerLoginRecover from "./manufacturer/manufacturer_password_recov
 import ManufacturerHomePage from "./manufacturer/manufacturer_home";
 import GenerateQR from "./manufacturer/manufacturer_generateqr";
 import ManufacturerViewQR from "./manufacturer/manufacturer_viewqr";
-import ContactUsPage from "./contactus";
+import ContactUsPage from "./contactUs";
 import QRCodeScanner from "./user/scan_qr";
 import ScanURL from "./scan_url";
 
@@ -23,6 +23,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/home" element={<LandingPage />} />
         <Route path="/contactus" element={<ContactUsPage />} />
         <Route path="/signup/user" element={<UserSignup />} />
         <Route path="/login/user" element={<UserLogin />} />

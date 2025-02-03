@@ -1,0 +1,186 @@
+/* manufacturer_viewqr.css */
+
+.manufacturer-viewqr-container {
+  font-family: "Reem Kufi", sans-serif;
+  font-family: "Reem Kufi", sans-serif;
+  background-image: url("../../../public/img4.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  min-height: 100vh;
+  margin-top: -80px;
+}
+
+/* Navbar Styles */
+/* .navbar {
+  background-color: rgba(1, 14, 22, 0.7);
+  padding: 15px;
+  position: fixed;
+  width: 100%;
+  height: 80px;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+} */
+
+.navbar-generated {
+  background-color: rgba(1, 14, 22, 0.7);
+  padding: 15px;
+  position: absolute;
+  width: 100%;
+  height: 80px;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* Spacing for navbar */
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 15px 25px;
+  font-size: 18px;
+  transition: all 0.3s;
+}
+
+.nav-link:hover {
+  color: yellow;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+}
+
+/* Logo positioning at the top-left */
+.logo-container {
+  position: fixed; /* Fixed so it stays in place even on scrolling */
+  top: 10px;
+  left: 10px;
+  height: 100px;
+  width: 100px;
+  z-index: 1000; /* Ensure it's above other elements */
+}
+
+.logo-container img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+/* Title styling to be at top-center */
+h3.title {
+  position: absolute;
+  top: 120px; /* Give space for the logo */
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-weight: 900;
+  font-size: 2rem;
+}
+
+/* QR Codes Display */
+.previous-qr-codes-container {
+  margin-top: 80px; /* Adjust to prevent overlap with navbar */
+  padding: 100px 0px;
+  height: fit-content;
+  /* border: 1px solid; */
+}
+
+.qr-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: left;
+  color: #333;
+}
+
+.qr-card h5 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.qr-card p {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.download-button {
+  padding: 10px 25px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.download-button:hover {
+  background-color: #218838;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.col-12 {
+  flex: 1 1 100%;
+}
+
+.col-md-4 {
+  flex: 1 1 30%;
+}
+
+@media screen and (max-width: 768px) {
+  .col-md-4 {
+    flex: 1 1 100%;
+  }
+}
+
+.previous-gen {
+  font-size: 3.4rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.795);
+  background-color: rgba(255, 255, 255, 0.644);
+  padding: 6px 20px;
+  margin-bottom: 60px;
+}
+
+.prev-gen-card {
+  padding: 10px;
+}
+
+.prev-gen-card-title {
+  border-radius: 6px;
+}
+
+.prev-gen-card-text {
+  margin: 0;
+  background-color: rgba(255, 255, 255, 0.644);
+  /* margin-left: 10px; */
+  padding: 6px;
+  text-align: left;
+  font-size: 1rem;
+}
+
+.prev-gen-card-med-name {
+  text-transform: capitalize;
+  background-color: rgba(128, 128, 128, 0.705);
+  padding: 10px 0px;
+  font-weight: 600;
+  font-size: 1.8rem;
+  border-radius: 6px;
+}
+
+.prev-gen-btn {
+  margin-top: 8px;
+}

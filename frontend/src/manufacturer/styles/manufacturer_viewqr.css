@@ -1,9 +1,6 @@
-/* manufacturer_viewqr.css */
-
 .manufacturer-viewqr-container {
   font-family: "Reem Kufi", sans-serif;
-  font-family: "Reem Kufi", sans-serif;
-  background-image: url("../../../public/img4.png");
+  background-image: url("/img4.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -12,151 +9,99 @@
   margin-top: -80px;
 }
 
-/* Navbar Styles */
-/* .navbar {
-  background-color: rgba(1, 14, 22, 0.7);
-  padding: 15px;
+.viewqr-manufacturer-navbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   position: fixed;
-  width: 100%;
-  height: 80px;
   top: 0;
   left: 0;
-  z-index: 1000;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-} */
+  right: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 2;
+  box-sizing: border-box;
+  padding: clamp(5px, 2vw, 10px);
+  margin: 0;
+}
 
-.navbar-generated {
-  background-color: rgba(1, 14, 22, 0.7);
-  padding: 15px;
+.nav-logo-container-manufacturerviewqr {
   position: absolute;
-  width: 100%;
-  height: 80px;
-  top: 0;
-  left: 0;
-  z-index: 1000;
+  top: clamp(5px, 2vh, 10px);
+  left: clamp(5px, 2vw, 10px);
+  border-radius: 50%;
+  z-index: 3;
+}
+
+.nav-logo-container-manufacturerviewqr img {
+  border-radius: 50%;
+  height: clamp(60px, 8vw, 140px);
+  width: clamp(60px, 8vw, 140px);
+  transition: all 0.3s ease;
+}
+
+.nav-links-container--manufacturerviewqr {
   display: flex;
-  justify-content: flex-end;
   align-items: center;
+  gap: clamp(3px, 1vw, 10px);
+  z-index: 3;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 clamp(10px, 3vw, 30px);
 }
 
-/* Spacing for navbar */
-.nav-link {
-  color: white;
+.nav-linkVal-container-manufacturerviewqr {
   text-decoration: none;
-  padding: 15px 25px;
-  font-size: 18px;
-  transition: all 0.3s;
-}
-
-.nav-link:hover {
-  color: yellow;
-  background-color: rgba(255, 255, 255, 0.2);
+  color: rgb(108, 183, 206);
+  padding: clamp(6px, 1.2vw, 15px);
+  font-size: clamp(14px, 2vw, 25px);
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+  display: inline-flex;
+  align-items: center;
   border-radius: 5px;
 }
 
-/* Logo positioning at the top-left */
-.logo-container {
-  position: fixed; /* Fixed so it stays in place even on scrolling */
-  top: 10px;
-  left: 10px;
-  height: 100px;
-  width: 100px;
-  z-index: 1000; /* Ensure it's above other elements */
-}
-
-.logo-container img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-}
-
-/* Title styling to be at top-center */
-h3.title {
-  position: absolute;
-  top: 120px; /* Give space for the logo */
-  width: 100%;
-  text-align: center;
-  color: white;
-  font-weight: 900;
-  font-size: 2rem;
+.nav-linkVal-container-manufacturerviewqr:hover {
+  color: yellow;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 /* QR Codes Display */
 .previous-qr-codes-container {
-  margin-top: 80px; /* Adjust to prevent overlap with navbar */
-  padding: 100px 0px;
+  margin-top: 80px;
+  padding: 100px 20px; /* Added horizontal padding */
   height: fit-content;
-  /* border: 1px solid; */
 }
 
-.qr-card {
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  text-align: left;
-  color: #333;
-}
-
-.qr-card h5 {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 15px;
-}
-
-.qr-card p {
-  font-size: 1rem;
-  margin-bottom: 10px;
-}
-
-.download-button {
-  padding: 10px 25px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
-}
-
-.download-button:hover {
-  background-color: #218838;
-}
-
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.col-12 {
-  flex: 1 1 100%;
-}
-
-.col-md-4 {
-  flex: 1 1 30%;
-}
-
-@media screen and (max-width: 768px) {
-  .col-md-4 {
-    flex: 1 1 100%;
-  }
-}
-
-.previous-gen {
-  font-size: 3.4rem;
-  font-weight: 600;
+.previous-generatedqr {
+  font-size: clamp(24px, 5vw, 40px); /* Made font-size responsive */
+  font-weight: 900;
   color: rgba(0, 0, 0, 0.795);
   background-color: rgba(255, 255, 255, 0.644);
   padding: 6px 20px;
   margin-bottom: 60px;
+  text-align: center;
+}
+
+.row-generateqr {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .prev-gen-card {
   padding: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.prev-gen-card:hover {
+  transform: translateY(-5px);
 }
 
 .prev-gen-card-title {
@@ -166,21 +111,56 @@ h3.title {
 .prev-gen-card-text {
   margin: 0;
   background-color: rgba(255, 255, 255, 0.644);
-  /* margin-left: 10px; */
-  padding: 6px;
+  padding: 12px;
   text-align: left;
-  font-size: 1rem;
+  font-size: clamp(14px, 1.5vw, 1rem);
 }
 
 .prev-gen-card-med-name {
-  text-transform: capitalize;
+  text-transform: uppercase;
   background-color: rgba(128, 128, 128, 0.705);
-  padding: 10px 0px;
+  padding: 10px;
   font-weight: 600;
-  font-size: 1.8rem;
+  font-size: clamp(18px, 2.5vw, 1.8rem);
   border-radius: 6px;
+  text-align: center;
+  margin-bottom: 15px;
 }
 
 .prev-gen-btn {
-  margin-top: 8px;
+  margin-top: 15px;
+  border-radius: 20px;
+  background-color: rgb(38, 160, 38);
+  width: 100%;
+  height: 40px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.prev-gen-btn:hover {
+  background-color: rgb(7, 241, 7);
+}
+
+/* Media Queries for better responsiveness */
+@media (max-width: 768px) {
+  .row-generateqr {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  .previous-qr-codes-container {
+    padding: 80px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .row-generateqr {
+    grid-template-columns: 1fr;
+  }
+
+  .previous-qr-codes-container {
+    padding: 60px 10px;
+  }
 }

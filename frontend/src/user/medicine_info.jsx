@@ -1,16 +1,61 @@
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom"; // Import Link for navigation
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // Ensure the CSS is imported correctly
 import "./styles/medicine_info.css";
 
-function MedicineInfo() {
+const MedicineInfo = () => {
+  // Check sessionStorage for the language, default to 'en' if not found
+  const [language, setLanguage] = useState(
+    sessionStorage.getItem("language") || "en"
+  );
+
+  // Translations for different languages
+  const translations = {
+    en: {
+      HomeNav: "Home",
+      ContactUsNav: "Contact Us",
+      LogOut: "Logout",
+      SearchLbl: "Medicine Information Search",
+      SearchBar: "Enter Medicine Name (example : Paracetamol)",
+      ButtonVal: "Search",
+      DetailsForVal: "Details for",
+      DosageFormVal: "Dosage Form",
+      AgeGrpVal: "Age Group",
+      SideEffectsVal: "Side Effects",
+      PurposeVal: "Purpose",
+      WarningsVal: "Warnings",
+      OverdosageVal: "Overdosage",
+      AdverseActionsVal: "Adverse Actions",
+      GeneralPrecautionsVal: "General Precautions",
+      LogoutToast: "You have been logged out",
+    },
+    kn: {
+      HomeNav: "ಹೋಮ್",
+      ContactUsNav: "ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ",
+      LogOut: "ಲಾಗ್ ಔಟ್",
+      SearchLbl: "ಔಷಧಿ ಮಾಹಿತಿಯ ಹುಡುಕಾಟ",
+      SearchBar: "ಔಷಧಿಯ ಹೆಸರು ನಮೂದಿಸಿ (ಉದಾಹರಣೆ: ಪ್ಯಾರಾಸಿಟಮೊಲ್)",
+      ButtonVal: "ಹುಡುಕಿ",
+      DetailsForVal: "ವಿವರಗಳು :",
+      DosageFormVal: "ಡೋಸೇಜ್",
+      AgeGrpVal: "ವಯೋಮಾನದ ಗುಂಪು",
+      SideEffectsVal: "ಪರಿಣಾಮಗಳು",
+      PurposeVal: "ಉದ್ದೇಶ",
+      WarningsVal: "ಎಚ್ಚರಿಕೆಗಳು",
+      OverdosageVal: "ಅತಿಮಾತ್ರೆ ಪರಿಣಾಮಗಳು",
+      AdverseActionsVal: "ಅನನುಕೂಲಕಾರಿ ಕ್ರಿಯೆಗಳು",
+      GeneralPrecautionsVal: "ಸಾಮಾನ್ಯ ಮುನ್ನೆಚ್ಚರಿಕೆಗಳು",
+      LogoutToast: "ನೀವು ಲಾಗ್ ಔಟ್ ಆಗಿದ್ದೀರಿ",
+    },
+  };
+
   const [medicineName, setMedicineName] = useState(""); // Controlled input field
   const [searchQuery, setSearchQuery] = useState(""); // Search query triggered on submit
   const [medicineResults, setMedicineResults] = useState([]); // Array to store search results
   const [error, setError] = useState(null);
   const [suggestions, setSuggestions] = useState([]); // Array to store pill name suggestions
-  // const [translations, setTranslations] = useState({}); // Store translated text
-  // const [selectedLanguage, setSelectedLanguage] = useState("en"); // Language state
 
   // Helper function to get the position of the nth occurrence of a character
   const getNthOccurrence = (str, char, n) => {
@@ -29,80 +74,15 @@ function MedicineInfo() {
     return index !== -1 ? text.slice(0, index + 1) : text; // Include the 10th full stop
   };
 
-  // Function to fetch translations for static texts
-  // const fetchTranslations = async () => {
-  //   const storedLanguage = sessionStorage.getItem("language");
-  //   if (storedLanguage) {
-  //     setSelectedLanguage(storedLanguage);
-  //   }
-
-  //   const textsToTranslate = [
-  //     "Medicine Information Search",
-  //     "Please enter a valid medicine name.",
-  //     "Dosage Form",
-  //     "Age Group",
-  //     "Side Effects",
-  //     "Purpose",
-  //     "Warnings",
-  //     "Overdosage",
-  //     "Adverse Actions",
-  //     "General Precautions",
-  //     "Home",
-  //     "Contact Us",
-  //     "Logout",
-  //     "Search",
-  //     "Enter medicine name (e.g., Paracetamol)",
-  //     "Details for",
-  //     "No information available.",
-  //   ];
-
-  //   const translatedTexts = {};
-
-  //   for (const text of textsToTranslate) {
-  //     try {
-  //       const response = await axios.post("http://localhost:3000/translate", {
-  //         text,
-  //       });
-  //       translatedTexts[text] = response.data.translatedText || text;
-  //     } catch (error) {
-  //       console.error("Error fetching translations:", error);
-  //     }
-  //   }
-
-  //   setTranslations(translatedTexts);
-  // };
-
-  // Fetch pill names suggestions from backend
-  const fetchSuggestions = async (query) => {
-    if (query.trim() === "") {
-      setSuggestions([]); // Clear suggestions if input is empty
-      return;
-    }
-    try {
-      // Fetch pill names from backend API based on search query
-      const response = await axios.get(
-        `http://localhost:3000/medicine/suggestions?query=${query}`
-      );
-      setSuggestions(response.data || []); // Set the list of suggestions
-    } catch (err) {
-      console.error("Error fetching suggestions:", err);
-    }
-  };
-
   const handleInputChange = (e) => {
     setMedicineName(e.target.value);
-    fetchSuggestions(e.target.value); // Fetch suggestions as user types
   };
 
   const handleSearch = () => {
     if (medicineName.trim() === "") {
-      // setError(
-      //   translations["Please enter a valid medicine name."] ||
-      //     "ದಯವಿಟ್ಟು ಮಾನ್ಯವಾದ ಔಷಧಿಯ ಹೆಸರನ್ನು ನಮೂದಿಸಿ."
-      // );
+      setError("Please Enter Valid Medicine Name");
       return;
     }
-    setSearchQuery(medicineName); // Update search query on submit
     fetchMedicineDetails(medicineName);
   };
 
@@ -122,67 +102,64 @@ function MedicineInfo() {
       setError(null); // Clear error on success
     } catch (err) {
       console.error("Error fetching medicine details:", err);
-      setError(
-        err.response?.data?.message
-        // translations["An error occurred while fetching medicine details."] ||
-        // "ಊಷಧಿ ವಿವರಗಳನ್ನು ಪಡೆಯುವಲ್ಲಿ ದೋಷವಾಗಿದೆ."
-      );
+      setError(err.response?.data?.message);
     }
   };
 
-  // Handle language change
-  // const handleLanguageChange = (e) => {
-  //   const newLanguage = e.target.value;
-  //   setSelectedLanguage(newLanguage);
-  //   fetchTranslations(newLanguage); // Fetch translations based on the selected language
-  // };
-
-  // Call fetchTranslations once the component is mounted or language is changed
-  // useEffect(() => {
-  //   fetchTranslations();
-  // }, [selectedLanguage]);
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    // Remove the session storage items
+    sessionStorage.removeItem("userName");
+    sessionStorage.removeItem("userToken");
+    sessionStorage.removeItem("userId");
+    sessionStorage.removeItem("email");
+    sessionStorage.removeItem("language");
+    toast.info(translations[language].LogoutToast),
+      {
+        autoClose: 5000, // Toast will stay for 10 seconds
+      };
+    setTimeout(() => {
+      navigate("/home");
+    }, 5000);
+  };
 
   return (
-    <div className="HomeBody">
-      {/* Language Selector Dropdown */}
-      {/* <div className="language-selector user-home-lang">
-        <label htmlFor="language">Language:</label>
-        <select
-          id="language"
-          value={selectedLanguage}
-          onChange={handleLanguageChange}
-        >
-          <option value="en">English</option>
-          <option value="kn">Kannada</option>
-        </select>
-      </div> */}
-
+    <div className="medicine-info-container">
       {/* Navbar */}
-      <div className="navbar">
-        <Link to="/user/home" className="nav-link">
-          Home
-        </Link>
-        <Link to="/contactus" className="nav-link">
-          Contact Us
-        </Link>
-        <Link to="/logout" className="nav-link">
-          Logout
-        </Link>
+      <div className="user-medicineinfo-navbar">
+        {/* Logo */}
+        <div className="nav-logo-container7">
+          <img src={"/logo3.jpg"} alt="KYM Logo" />
+        </div>
+        <div className="nav-links-container-medicineinfo">
+          <Link to="/user/home" className="nav-linkVal-container-medicineinfo">
+            {translations[language].HomeNav}
+          </Link>
+          <Link to="/contactus" className="nav-linkVal-container-medicineinfo">
+            {translations[language].ContactUsNav}
+          </Link>
+          <Link
+            className="nav-linkVal-container-userhome"
+            onClick={handleLogout}
+          >
+            {translations[language].LogOut}
+          </Link>
+        </div>
       </div>
 
-      <h1 className="title-med-info">Medicine Information Search</h1>
+      <h1 className="title-med-info">{translations[language].SearchLbl}</h1>
 
       {/* Input card */}
-      <div className="input-card">
+      <div className="input-card-medinfo">
         <input
           type="text"
-          placeholder={"Enter medicine name (e.g., Paracetamol)"}
+          placeholder={translations[language].SearchBar}
           value={medicineName}
           onChange={handleInputChange}
         />
         {/* Dropdown for suggestions */}
         {suggestions.length > 0 && (
-          <ul className="suggestions-dropdown">
+          <ul className="suggestions-dropdown-medinfo">
             {suggestions.map((suggestion, index) => (
               <li
                 key={index}
@@ -197,7 +174,9 @@ function MedicineInfo() {
           </ul>
         )}
         <div>
-          <button onClick={handleSearch}>Search</button>
+          <button onClick={handleSearch}>
+            {translations[language].ButtonVal}
+          </button>
         </div>
       </div>
 
@@ -205,55 +184,56 @@ function MedicineInfo() {
 
       {/* Display latest searched medicine details */}
       {medicineResults.length > 0 && (
-        <div className="medicine-card">
+        <div className="medicine-card-medinfo">
           <h2>
-            Details for {medicineResults[medicineResults.length - 1].name}
+            {translations[language].DetailsForVal.toUpperCase()}{" "}
+            {medicineResults[medicineResults.length - 1].name.toUpperCase()}
           </h2>
           <p>
-            <strong>Dosage Form</strong>{" "}
+            <strong>{translations[language].DosageFormVal}</strong>{" "}
             {sliceText(
               medicineResults[medicineResults.length - 1].details.dosage
             )}
           </p>
           <p>
-            <strong>Age Group</strong>{" "}
+            <strong>{translations[language].AgeGrpVal}</strong>{" "}
             {sliceText(
               medicineResults[medicineResults.length - 1].details.ageGroup
             )}
           </p>
           <p>
-            <strong>Side Effects</strong>{" "}
+            <strong>{translations[language].SideEffectsVal}</strong>{" "}
             {sliceText(
               medicineResults[medicineResults.length - 1].details.sideEffects
             )}
           </p>
           <p>
-            <strong>Purpose</strong>{" "}
+            <strong>{translations[language].PurposeVal}</strong>{" "}
             {sliceText(
               medicineResults[medicineResults.length - 1].details.medicine
                 ?.purpose
             )}
           </p>
           <p>
-            <strong>Warnings</strong>{" "}
+            <strong>{translations[language].WarningsVal}</strong>{" "}
             {sliceText(
               medicineResults[medicineResults.length - 1].details.warnings
             )}
           </p>
           <p>
-            <strong>Overdosage</strong>{" "}
+            <strong>{translations[language].OverdosageVal}</strong>{" "}
             {sliceText(
               medicineResults[medicineResults.length - 1].details.overdosage
             )}
           </p>
           <p>
-            <strong>Adverse Actions</strong>{" "}
+            <strong>{translations[language].AdverseActionsVal}</strong>{" "}
             {sliceText(
               medicineResults[medicineResults.length - 1].details.adverseActions
             )}
           </p>
           <p>
-            <strong>General Precautions</strong>{" "}
+            <strong>{translations[language].GeneralPrecautionsVal}</strong>{" "}
             {sliceText(
               medicineResults[medicineResults.length - 1].details
                 .generalPrecautions
@@ -261,15 +241,9 @@ function MedicineInfo() {
           </p>
         </div>
       )}
-
-      {/* Logo */}
-      <div className="logo-container">
-        <Link to="/user/home">
-          <img src="/logo3.jpg" alt="KYM Logo" className="logo-img" />
-        </Link>
-      </div>
+      <ToastContainer />
     </div>
   );
-}
+};
 
 export default MedicineInfo;

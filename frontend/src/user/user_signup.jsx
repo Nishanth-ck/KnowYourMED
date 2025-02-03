@@ -1,10 +1,71 @@
 import React, { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import "./styles/user_signup.css";
 
-function UserSignup() {
+const UserSignup = () => {
+  // Check sessionStorage for the language, default to 'en' if not found
+  const [language, setLanguage] = useState(
+    sessionStorage.getItem("language") || "en"
+  );
+
+  useEffect(() => {
+    // Whenever the language changes, update the sessionStorage
+    sessionStorage.setItem("language", language);
+  }, [language]);
+
+  // Translations for different languages
+  const translations = {
+    en: {
+      languageLabel: "Language / ಭಾಷೆ :",
+      topLabel: "User Registration",
+      userName: "User Name",
+      phoneNumber: "Phone Number",
+      Age: "Age",
+      Email: "Email",
+      passWord: "Password",
+      confirmPassword: "Confirm Password",
+      BtnVal: "Register",
+      LoginLink: "Already have an account ?",
+      LoginLinkVal: "Login",
+      namudisi: "",
+      enterVal: "Enter ",
+      RegisterSuccess: "Registration of the User has been successful",
+      alert1: "Please fill in all the fields.",
+      alert2: "Passwords do not match.",
+      alert3: "Please enter a valid email address",
+    },
+    kn: {
+      languageLabel: "ಭಾಷೆ / Language :",
+      topLabel: "ಬಳಕೆದಾರರ ನೋಂದಣಿ",
+      userName: "ಬಳಕೆದಾರರ ಹೆಸರು",
+      phoneNumber: "ಫೋನ್ ಸಂಖ್ಯೆ",
+      Age: "ವಯಸ್ಸು",
+      Email: "ಇಮೇಲ್",
+      passWord: "ಗುಪ್ತಪದ",
+      confirmPassword: "ಗುಪ್ತಪದವನ್ನು ದೃಢೀಕರಿಸಿ",
+      BtnVal: "ನೋಂದಣಿ",
+      LoginLink: "ಈಗಾಗಲೇ ಖಾತೆ ಹೊಂದಿದ್ದೀರಾ?",
+      LoginLinkVal: "ಲಾಗಿನ್",
+      namudisi: " ನಮೂದಿಸಿ",
+      enterVal: "",
+      RegisterSuccess: "ಬಳಕೆದಾರರ ನೋಂದಣಿ ಯಶಸ್ವಿಯಾಗಿದೆ",
+      alert1: "ದಯವಿಟ್ಟು ಎಲ್ಲಾ ಕ್ಷೇತ್ರಗಳನ್ನು ಭರ್ತಿ ಮಾಡಿ.",
+      alert2: "ಗುಪ್ತಪದಗಳು ಹೊಂದಿಕೆಯಾಗುತ್ತಿಲ್ಲ.",
+      alert3: "ದಯವಿಟ್ಟು ಮಾನ್ಯ ಇಮೇಲ್ ವಿಳಾಸವನ್ನು ನಮೂದಿಸಿ.",
+    },
+  };
+
+  // Function to handle language change
+  const handleLanguageChange = (e) => {
+    setLanguage(e.target.value);
+    // Refresh the page to reflect the changes
+    window.location.reload();
+  };
+
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -16,73 +77,6 @@ function UserSignup() {
     confirm_password: "",
   });
   const [error, setError] = useState("");
-  const [selectedLanguage, setSelectedLanguage] = useState(
-    sessionStorage.getItem("language") || "en"
-  );
-  const [translations, setTranslations] = useState({});
-
-  const wordsToTranslate = [
-    "User Registration",
-    "User Name",
-    "Phone Number",
-    "Age",
-    "Email",
-    "Password",
-    "Confirm Password",
-    "Register",
-    "Already have an account?",
-    "Login",
-    "Please fill in all fields.",
-    "Passwords do not match!",
-  ];
-
-  // Fetch translations from the backend
-  const fetchTranslations = async () => {
-    const translatedTexts = {};
-
-    for (const word of wordsToTranslate) {
-      try {
-        const response = await fetch("http://localhost:3000/translate/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ text: word }),
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-          // Clean up unwanted text from the translation
-          let translatedWord = result.translatedText;
-          if (translatedWord.includes("ಇದನ್ನು ಅನುವಾದಿಸಲಾಗುತ್ತಿದೆ")) {
-            translatedWord = translatedWord
-              .replace("ಇದನ್ನು ಅನುವಾದಿಸಲಾಗುತ್ತಿದೆ", "")
-              .trim();
-          }
-          translatedTexts[word] = translatedWord;
-        }
-      } catch (error) {
-        console.error(`Translation failed for "${word}":`, error);
-        translatedTexts[word] = word; // Fallback to original word
-      }
-    }
-
-    setTranslations(translatedTexts);
-  };
-
-  // Fetch saved language and translations on mount
-  useEffect(() => {
-    fetchTranslations();
-  }, [selectedLanguage]);
-
-  // Handle language change
-  const handleLanguageChange = (e) => {
-    const newLanguage = e.target.value;
-    setSelectedLanguage(newLanguage);
-    sessionStorage.setItem("language", newLanguage);
-    fetchTranslations();
-  };
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
@@ -96,7 +90,15 @@ function UserSignup() {
     }));
   };
 
+  // Email validation function
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const handleSubmit = async () => {
+    console.log("button clicked");
+    console.log(formData);
     if (
       !formData.username ||
       !formData.phone_number ||
@@ -105,12 +107,21 @@ function UserSignup() {
       !formData.password ||
       !formData.confirm_password
     ) {
-      setError(translations["Please fill in all fields."]);
+      setError("Please fill in all fields.");
+      toast.error(translations[language].alert1);
       return;
     }
 
     if (formData.password !== formData.confirm_password) {
-      setError(translations["Passwords do not match!"]);
+      setError("Passwords do not match!");
+      toast.error(translations[language].alert2);
+      return;
+    }
+
+    // Check if email is valid
+    if (!isValidEmail(formData.email)) {
+      setError("Please enter a valid email address.");
+      toast.error(translations[language].alert3);
       return;
     }
 
@@ -126,91 +137,115 @@ function UserSignup() {
       const result = await response.json();
 
       if (response.ok) {
-        alert("Registration successful! Redirecting to login...");
-        navigate("/login/user");
+        toast.info(translations[language].RegisterSuccess);
+        setTimeout(() => {
+          navigate("/login/user");
+        }, 3000);
       } else {
-        setError(result.message || translations["Registration failed."]);
+        setError(result.message);
       }
     } catch (err) {
-      setError(translations["An unexpected error occurred."]);
+      setError(result.message);
     }
   };
 
   return (
-    <div className="signup-container">
-      {/* Language Selector */}
-      {/* <div className="language-selector">
-        <label htmlFor="language">Language:</label>
-        <select
-          id="language"
-          value={selectedLanguage}
-          onChange={handleLanguageChange}
-        >
-          <option value="en">English</option>
-          <option value="kn">Kannada</option>
-        </select>
-      </div> */}
+    <div className="signup-containerU">
+      {/* Logo */}
+      <div className="nav-logo-container2">
+        <img src={"/logo3.jpg"} alt="KYM Logo" />
+      </div>
+      <div className="language-selector2">
+        <label htmlFor="language-dropdown2" style={{ color: "black" }}>
+          {translations[language].languageLabel}
+        </label>
+        <div className="language-dropdown-container2">
+          <select
+            id="language-dropdown2"
+            className="language-dropdown2"
+            value={language}
+            onChange={handleLanguageChange}
+          >
+            <option value="en">English</option>
+            <option value="kn">ಕನ್ನಡ</option>{" "}
+          </select>
+        </div>
+      </div>
 
       {/* Signup Form */}
-      <div className="signup-form">
-        <h2 className="signup-heading">
-          {translations["User Registration"] || "User Registration"}
-        </h2>
+      <div className="signup-formU">
+        <h2 className="signup-headingU">{translations[language].topLabel}</h2>
         <form>
-          <div className="form-group">
-            <label htmlFor="username">
-              {translations["User Name"] || "User Name"}
-            </label>
+          <div className="form-groupU">
+            <label htmlFor="username">{translations[language].userName}</label>
             <input
               type="text"
               id="username"
               name="username"
-              placeholder={translations["User Name"] || "Enter User Name"}
+              placeholder={
+                translations[language].enterVal +
+                translations[language].userName +
+                translations[language].namudisi
+              }
               onChange={handleInputChange}
             />
           </div>
-          <div className="form-group">
+          <div className="form-groupU">
             <label htmlFor="phone_number">
-              {translations["Phone Number"] || "Phone Number"}
+              {translations[language].phoneNumber}
             </label>
             <input
               type="number"
               id="phone_number"
               name="phone_number"
-              placeholder={translations["Phone Number"] || "Enter Phone Number"}
+              placeholder={
+                translations[language].enterVal +
+                translations[language].phoneNumber +
+                translations[language].namudisi
+              }
               onChange={handleInputChange}
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="age">{translations["Age"] || "Age"}</label>
+          <div className="form-groupU">
+            <label htmlFor="age">{translations[language].Age}</label>
             <input
               type="number"
               id="age"
               name="age"
-              placeholder={translations["Age"] || "Enter Age"}
+              placeholder={
+                translations[language].enterVal +
+                translations[language].Age +
+                translations[language].namudisi
+              }
               onChange={handleInputChange}
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="email">{translations["Email"] || "Email"}</label>
+          <div className="form-groupU">
+            <label htmlFor="email">{translations[language].Email}</label>
             <input
               type="email"
               id="email"
               name="email"
-              placeholder={translations["Email"] || "Enter Email"}
+              placeholder={
+                translations[language].enterVal +
+                translations[language].Email +
+                translations[language].namudisi
+              }
               onChange={handleInputChange}
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="password">
-              {translations["Password"] || "Password"}
-            </label>
+          <div className="form-groupU">
+            <label htmlFor="password">{translations[language].passWord}</label>
             <div className="password-input">
               <input
                 type={showPassword ? "text" : "password"}
                 id="password"
                 name="password"
-                placeholder={translations["Password"] || "Enter Password"}
+                placeholder={
+                  translations[language].enterVal +
+                  translations[language].passWord +
+                  translations[language].namudisi
+                }
                 onChange={handleInputChange}
               />
               <FontAwesomeIcon
@@ -220,38 +255,37 @@ function UserSignup() {
               />
             </div>
           </div>
-          <div className="form-group">
+          <div className="form-groupU">
             <label htmlFor="confirm_password">
-              {translations["Confirm Password"] || "Confirm Password"}
+              {translations[language].confirmPassword}
             </label>
             <input
               type={showPassword ? "text" : "password"}
               id="confirm_password"
               name="confirm_password"
               placeholder={
-                translations["Confirm Password"] || "Confirm Password"
+                translations[language].enterVal +
+                translations[language].confirmPassword +
+                translations[language].namudisi
               }
               onChange={handleInputChange}
             />
           </div>
-          {error && <small className="error-message">{error}</small>}
-          <button type="button" className="btn-submit" onClick={handleSubmit}>
-            {translations["Register"] || "Register"}
+          {error && <small className="error-messageU">{error}</small>}
+          <button type="button" className="btn-submitU" onClick={handleSubmit}>
+            {translations[language].BtnVal}
           </button>
         </form>
-        <p>
-          {translations["Already have an account?"] ||
-            "Already have an account?"}{" "}
-          <Link to="/login/user" className="login-link">
-            {translations["Login"] || "Login"}
+        <p className="p-user-signup">
+          {translations[language].LoginLink}{" "}
+          <Link to="/login/user" className="login-linkU">
+            {translations[language].LoginLinkVal}
           </Link>
         </p>
       </div>
-      <div className="logo-container-user-login">
-        <img src="/logo3.jpg" alt="KYM Logo" className="logo-user-page" />
-      </div>
+      <ToastContainer />
     </div>
   );
-}
+};
 
 export default UserSignup;

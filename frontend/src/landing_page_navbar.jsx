@@ -1,131 +1,96 @@
-import { useState, useEffect, useContext } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBars,
-  faHome,
-  faInfoCircle,
-  faPhone,
-  // faCalendarAlt,
-} from "@fortawesome/free-solid-svg-icons";
+import React, { useState, useEffect } from "react";
 import "./landing_page.css";
-import { GlobalContext } from "./context";
 
 const LandingPageNavbar = () => {
-  const { setLang } = useContext(GlobalContext);
-  const [openMenu, setOpenMenu] = useState(false);
-  const [language, setLanguage] = useState("en"); // Default to 'en' (English)
-  const [kannadaTranslation, setKannadaTranslation] = useState("Kannada"); // Store translated text for Kannada
+  // Check sessionStorage for the language, default to 'en' if not found
+  const [language, setLanguage] = useState(
+    sessionStorage.getItem("language") || "en"
+  );
 
-  // Menu options with FontAwesome icons
-  const menuOptions = [
-    { text: "Home", icon: <FontAwesomeIcon icon={faHome} /> },
-    { text: "FAQ", icon: <FontAwesomeIcon icon={faInfoCircle} /> },
-    { text: "Contact Us", icon: <FontAwesomeIcon icon={faPhone} /> },
-  ];
-
-  // When the component mounts, retrieve the saved language from sessionStorage
   useEffect(() => {
-    const savedLanguage = sessionStorage.getItem("language");
-    if (savedLanguage) {
-      setLanguage(savedLanguage); // Update the state with saved language
-    }
+    // Whenever the language changes, update the sessionStorage
+    sessionStorage.setItem("language", language);
+  }, [language]);
 
-    // Fetch translation for Kannada when the component mounts
-    fetchKannadaTranslation();
-  }, []);
-
-  // Fetch translation for Kannada option
-  const fetchKannadaTranslation = async () => {
-    try {
-      const response = await fetch("http://localhost:3000/translate/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: "Kannada" }), // Send "Kannada" text to translate
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        setKannadaTranslation(result.translatedText); // Update the translated text
-      } else {
-        console.error("Translation failed:", result.message);
-      }
-    } catch (err) {
-      console.error("Error in translation:", err);
-    }
+  // Translations for different languages
+  const translations = {
+    en: {
+      titleLabel: "Know Your Med",
+      languageLabel: "Language / ಭಾಷೆ :",
+      home: "Home",
+      userLogin: "User Login",
+      userSignup: "User Signup",
+      manufacturerLogin: "Manufacturer Login",
+      manufacturerSignup: "Manufacturer Signup",
+      contactUs: "Contact Us",
+    },
+    kn: {
+      titleLabel: "ಕ್ನೋ ಯುವರ್ ಮೆಡ್",
+      languageLabel: "ಭಾಷೆ / Language :",
+      home: "ಹೋಮ್",
+      userLogin: "ಬಳಕೆದಾರ ಲಾಗಿನ್",
+      userSignup: "ಬಳಕೆದಾರ ಸೈನ್ ಅಪ್",
+      manufacturerLogin: "ತಯಾರಕ ಲಾಗಿನ್",
+      manufacturerSignup: "ತಯಾರಕ ಸೈನ್ ಅಪ್",
+      contactUs: "ನಮಗೆ ಸಂಪರ್ಕಿಸಿ",
+    },
   };
 
-  const handleLanguageChange = (event) => {
-    const selectedLanguage = event.target.value;
-    selectedLanguage === "kn" ? setLang("kannada") : setLang("english");
-    setLanguage(selectedLanguage); // Update language state
-    sessionStorage.setItem("language", selectedLanguage); // Store selected language in sessionStorage
+  // Function to handle language change
+  const handleLanguageChange = (e) => {
+    setLanguage(e.target.value);
+    // Refresh the page to reflect the changes
+    window.location.reload();
   };
 
   return (
-    <nav>
+    <div>
       {/* Language selector */}
-      <div className="language-selector">
-        <label htmlFor="language-dropdown">Choose your language:</label>
-        <div className="language-dropdown-container">
+      <div className="language-selector1">
+        <label
+          htmlFor="language-dropdown1"
+          style={{ color: "rgba(16, 134, 150, 0.87)" }}
+        >
+          {translations[language].languageLabel}
+        </label>
+        <div className="language-dropdown-container1">
           <select
-            id="language-dropdown"
-            className="language-dropdown"
-            value={language} // Controlled input with state
-            onChange={handleLanguageChange} // Handle change in language
+            id="language-dropdown1"
+            className="language-dropdown1"
+            value={language}
+            onChange={handleLanguageChange}
           >
             <option value="en">English</option>
-            <option value="kn">{kannadaTranslation}</option>{" "}
-            {/* Dynamically set Kannada translation */}
+            <option value="kn">ಕನ್ನಡ</option>{" "}
           </select>
         </div>
       </div>
 
       {/* Logo */}
-      <div className="nav-logo-container">
-        <img src={"./Logo.png"} alt="Company Logo" />
+      <div className="nav-logo-container1">
+        <img src={"./logo3.jpg"} alt="KYM Logo" />
+      </div>
+
+      <div className="title-text-container100">
+        <h1 className="title-text-format100">
+          {translations[language].titleLabel}
+        </h1>
       </div>
 
       {/* Navigation Links */}
-      <div className="navbar-links-container">
-        <a href="/">Home</a> {/* Link component for routing */}
-        <a href="/login/user">User Login</a> {/* Link component for routing */}
-        <a href="/signup/user">User Signup</a>
-        <a href="/login/manufacturer">Manufacturer Login</a>{" "}
-        {/* Link component for routing */}
-        <a href="/signup/manufacturer">Manufacturer Signup</a>
-        {/* <a href="/fiq">FAQ</a> Updated link to "/fiq" */}
-        <a href="/contactus">Contact Us</a> {/* Updated link to "/contactus" */}
+      <div className="navbar-links-container1">
+        <a href="/home">{translations[language].home}</a>
+        <a href="/login/user">{translations[language].userLogin}</a>
+        <a href="/signup/user">{translations[language].userSignup}</a>
+        <a href="/login/manufacturer">
+          {translations[language].manufacturerLogin}
+        </a>
+        <a href="/signup/manufacturer">
+          {translations[language].manufacturerSignup}
+        </a>
+        <a href="/contactus">{translations[language].contactUs}</a>
       </div>
-
-      {/* Mobile Menu Toggle */}
-      <div className="navbar-menu-container">
-        <FontAwesomeIcon
-          icon={faBars}
-          size="lg"
-          onClick={() => setOpenMenu(!openMenu)}
-        />
-      </div>
-
-      {/* Mobile Menu (Drawer alternative) */}
-      {openMenu && (
-        <div className="mobile-menu">
-          <ul>
-            {menuOptions.map((item) => (
-              <li key={item.text}>
-                <a
-                  href={`#${item.text.toLowerCase().replace(" ", "")}`}
-                  onClick={() => setOpenMenu(false)}
-                >
-                  <span>{item.icon}</span>
-                  {item.text}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </nav>
+    </div>
   );
 };
 
