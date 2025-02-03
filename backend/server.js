@@ -13,20 +13,35 @@ import handlePill from "./routes/addPill.route.js";
 import handleManufactureInfo from "./routes/manufacture.route.js";
 import handleContact from "./routes/contact.route.js";
 
+dotenv.config();
+const app = express();
+
 const corsOptions = {
-  method: "GET,POST",
+  methods: ["GET", "POST"],
   allowedHeaders: "Content-Type,Authorization",
   credentials: true,
   origin: "https://know-your-med-lake.vercel.app",
   maxAge: 86400,
 };
 
-dotenv.config();
-const app = express();
+// app.use((req, res, next) => {
+//   res.header(
+//     "Access-Control-Allow-Origin",
+//     "https://know-your-med-lake.vercel.app"
+//   );
+//   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+//   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//   res.header("Access-Control-Allow-Credentials", "true");
+//   next();
+// });
 
 app.use(cors(corsOptions));
+
+app.options("*", cors(corsOptions));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 app.use("/auth/user", handleUserAuth);
 app.use("/auth/manufacture", handlePharmacistAuth);
 app.use("/refreshToken", handleRefreshToken);
