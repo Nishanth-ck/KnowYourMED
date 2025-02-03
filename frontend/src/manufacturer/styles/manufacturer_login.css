@@ -154,7 +154,7 @@ input {
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 340px) {
   .nav-logo-container10 {
     position: relative;
     text-align: center;

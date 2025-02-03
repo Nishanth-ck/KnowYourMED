@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Ensure the CSS is imported correctly
+import "react-toastify/dist/ReactToastify.css";
 import "./styles/medicine_info.css";
 
 const MedicineInfo = () => {
@@ -217,26 +217,29 @@ const MedicineInfo = () => {
           <p>
             <strong>{translations[language].WarningsVal}</strong>{" "}
             {sliceText(
-              medicineResults[medicineResults.length - 1].details.warnings
+              medicineResults[medicineResults.length - 1].details.medicine
+                ?.warnings
             )}
           </p>
           <p>
             <strong>{translations[language].OverdosageVal}</strong>{" "}
             {sliceText(
-              medicineResults[medicineResults.length - 1].details.overdosage
+              medicineResults[medicineResults.length - 1].details.medicine
+                ?.overdosage
             )}
           </p>
           <p>
             <strong>{translations[language].AdverseActionsVal}</strong>{" "}
             {sliceText(
-              medicineResults[medicineResults.length - 1].details.adverseActions
+              medicineResults[medicineResults.length - 1].details.medicine
+                ?.adverse_reactions
             )}
           </p>
           <p>
             <strong>{translations[language].GeneralPrecautionsVal}</strong>{" "}
             {sliceText(
-              medicineResults[medicineResults.length - 1].details
-                .generalPrecautions
+              medicineResults[medicineResults.length - 1].details.medicine
+                ?.general_precautions
             )}
           </p>
         </div>

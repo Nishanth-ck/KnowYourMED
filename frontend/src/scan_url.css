@@ -38,7 +38,7 @@
 
 .language-selector-scanurl {
   position: absolute;
-  top: clamp(5px, 1.5vh, 10px);
+  top: clamp(40px, 1.5vh, 10px);
   right: clamp(5px, 1.5vw, 10px);
   z-index: 10;
 }
@@ -191,8 +191,8 @@
 
 @media screen and (max-width: 480px) {
   .nav-logo-container-scanurl img {
-    height: clamp(30px, 5vw, 40px);
-    width: clamp(30px, 5vw, 40px);
+    height: clamp(66px, 5vw, 40px);
+    width: clamp(66px, 5vw, 40px);
   }
 
   .nav-linkVal-container-scanurl {
@@ -207,4 +207,21 @@
   .medicine-title-scanurl {
     font-size: clamp(20px, 3vw, 28px);
   }
+}
+
+.kannadaHeadingsspan {
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin: 4px 10px;
+  width: 200px;
+}
+
+.kannadaInfoBlock {
+  /* display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start; */
+  border: 1px solid;
+  margin: 10px;
+  padding: 10px;
 }

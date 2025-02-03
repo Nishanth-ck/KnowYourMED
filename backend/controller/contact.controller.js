@@ -1,3 +1,5 @@
+import nodemailer from "nodemailer";
+
 const handleContactPage = async (req, res) => {
   const { name, email, message } = req.body;
   const information = {

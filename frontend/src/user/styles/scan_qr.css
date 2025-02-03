@@ -185,8 +185,8 @@ input[type="file"] {
 
 @media screen and (max-width: 480px) {
   .nav-logo-container8 img {
-    height: clamp(30px, 5vw, 40px);
-    width: clamp(30px, 5vw, 40px);
+    height: clamp(66px, 5vw, 40px);
+    width: clamp(66px, 5vw, 40px);
   }
 
   .nav-linkVal-container-scanqr {

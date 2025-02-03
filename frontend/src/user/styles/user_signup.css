@@ -133,13 +133,14 @@ input {
 }
 
 /* Media Queries */
-@media screen and (min-width: 480px) {
+@media screen and (min-width: 340px) {
   .signup-containerU {
     padding: 20px;
   }
 
   .signup-formU {
     padding: 25px;
+    margin-top: 130px;
   }
 
   .language-dropdown-container2 {

@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { QrReader } from "react-qr-reader";
+import { useState, useEffect, useRef } from "react";
+// import { QrReader } from "react-qr-reader";
 import jsQR from "jsqr";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -93,6 +93,7 @@ const QRCodeScanner = () => {
             const match = code.data.match(urlRegex); // Use code.data, not url
             const url2 = match ? match[0] : null;
             setUrl1(url2);
+            toast.success("QR code detected successfully!");
             // setUrl1(code.data);
           } else {
             requestAnimationFrame(scan); // Keep scanning
@@ -153,6 +154,7 @@ const QRCodeScanner = () => {
 
     if (code) {
       setImageResult(code.data);
+      toast.success("QR code detected successfully!");
       setUrl(code.data);
 
       // Regular expression to match URLs

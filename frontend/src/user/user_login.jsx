@@ -104,9 +104,11 @@ const UserLogin = () => {
           navigate("/user/home");
         }, 3000);
       } else {
+        toast.error("Invalid Credentials");
         setError(result.message);
       }
     } catch (err) {
+      toast.error("Invalid Credentials");
       console.error("Error during login:", err);
       setError("An unexpected error occurred. Please try again later.");
     }

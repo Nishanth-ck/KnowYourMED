@@ -84,6 +84,43 @@ const handleEmail = async (req, res) => {
   }
 };
 
+const handeNewEmail = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const num = Math.floor(Math.random() * 999979) + 18;
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "knowyourmed1@gmail.com",
+        pass: `${process.env.EMAIL_PASS}`,
+      },
+    });
+
+    let mailOptions = {
+      from: "knowyourmed1@gmail.com",
+      to: `${email}`,
+      subject: "To Update the Password",
+      text: `${num}`,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({
+          error: "Unable to send the Email at the moment,Try again later",
+        });
+      } else {
+        console.log("Email sent: " + info.response);
+      }
+    });
+    return res.status(200).json({ otp: num });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Try again later!" });
+  }
+};
+
 const handlePassswordReset = async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
@@ -195,5 +232,6 @@ export {
   handleUserLogin,
   handleUserLogout,
   handleEmail,
+  handeNewEmail,
   handlePassswordReset,
 };

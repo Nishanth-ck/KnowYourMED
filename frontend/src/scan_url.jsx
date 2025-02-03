@@ -1,8 +1,23 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import "./scan_url.css";
+import axios from "axios";
 
 const ScanURL = () => {
+  const { uniqueId } = useParams();
+  // const [dataToRender, setDataToRender] = useState({});
+  const [adverseActions, setAdverseActions] = useState("");
+  const [ageGroup, setAgeGroup] = useState("");
+  const [dosage, setDosage] = useState("");
+  const [generalPrecautions, setGeneralPrecautions] = useState("");
+  const [overdosage, setOverDosage] = useState("");
+  const [purpose, setPurpose] = useState("");
+  const [sideEffects, setSideEffects] = useState("");
+  const [warnings, setWarnings] = useState("");
+  const [medicineInfo, setMedicineInfo] = useState(null);
+  const [medicineInfoKannada, setMedicineInfoKannada] = useState(null);
+  const [error, setError] = useState("");
+
   const [language, setLanguage] = useState(
     sessionStorage.getItem("language") || "en"
   );
@@ -60,12 +75,98 @@ const ScanURL = () => {
 
   const handleLanguageChange = (e) => {
     setLanguage(e.target.value);
-    window.location.reload();
+    // window.location.reload();
+    // setMedicineInfoKannada(medicineInfo);
+    // console.log("I am changing language!");
   };
 
-  const { uniqueId } = useParams();
-  const [medicineInfo, setMedicineInfo] = useState(null);
-  const [error, setError] = useState("");
+  useEffect(() => {
+    const getKannadaText = async () => {
+      if (language == "kn") {
+        setMedicineInfoKannada(medicineInfo);
+      }
+    };
+    getKannadaText();
+  }, [language, medicineInfo]);
+
+  useEffect(() => {
+    const gettingKannadaTextForMedInfo = async () => {
+      const data = medicineInfoKannada?.result?.medicine_info;
+      const newData = [
+        data?.adverseActions,
+        data?.ageGroup,
+        data?.dosage,
+        data?.generalPrecautions,
+        data?.overdosage,
+        data?.purpose,
+        data?.sideEffects,
+        data?.warnings,
+      ];
+
+      try {
+        const responseAdvReact = await axios.post(
+          "http://localhost:3000/translate",
+          {
+            text: newData[0],
+          }
+        );
+        setAdverseActions(responseAdvReact.data.translatedText);
+        const responseAgeGroup = await axios.post(
+          "http://localhost:3000/translate",
+          {
+            text: newData[1],
+          }
+        );
+        setAgeGroup(responseAgeGroup.data.translatedText);
+        const responseDosage = await axios.post(
+          "http://localhost:3000/translate",
+          {
+            text: newData[2],
+          }
+        );
+        setDosage(responseDosage.data.translatedText);
+        const responseGenPre = await axios.post(
+          "http://localhost:3000/translate",
+          {
+            text: newData[3],
+          }
+        );
+        setGeneralPrecautions(responseGenPre.data.translatedText);
+        const responseOverDosage = await axios.post(
+          "http://localhost:3000/translate",
+          {
+            text: newData[4],
+          }
+        );
+        setOverDosage(responseOverDosage.data.translatedText);
+        const responsePurpose = await axios.post(
+          "http://localhost:3000/translate",
+          {
+            text: newData[5],
+          }
+        );
+        setPurpose(responsePurpose.data.translatedText);
+        const responseSideEffects = await axios.post(
+          "http://localhost:3000/translate",
+          {
+            text: newData[6],
+          }
+        );
+        setSideEffects(responseSideEffects.data.translatedText);
+        const responseWarnings = await axios.post(
+          "http://localhost:3000/translate",
+          {
+            text: newData[7],
+          }
+        );
+        setWarnings(responseWarnings.data.translatedText);
+      } catch (err) {
+        console.log(err);
+        alert("something gone wrong in translation");
+      }
+    };
+    language == "kn" ? gettingKannadaTextForMedInfo() : "";
+  }, [medicineInfoKannada, language]);
 
   useEffect(() => {
     const fetchMedicineInfo = async () => {
@@ -145,35 +246,94 @@ const ScanURL = () => {
           <h2 className="medicine-title-scanurl">
             {translations[language].Titlelbl2}
           </h2>
-          {[
-            { label: translations[language].DosageFormVal, field: "dosage" },
-            {
-              label: translations[language].SideEffectsVal,
-              field: "sideEffects",
-            },
-            { label: translations[language].AgeGrpVal, field: "ageGroup" },
-            { label: translations[language].PurposeVal, field: "purpose" },
-            {
-              label: translations[language].GeneralPrecautionsVal,
-              field: "generalPrecautions",
-            },
-            { label: translations[language].WarningsVal, field: "warnings" },
-            {
-              label: translations[language].AdverseActionsVal,
-              field: "adverseActions",
-            },
-            {
-              label: translations[language].OverdosageVal,
-              field: "overdosage",
-            },
-          ].map((item) => (
-            <div key={item.field} className="medicine-detail-scanurl">
-              <span className="detail-label-scanurl">{item.label}</span>
-              <span className="detail-value-scanurl">
-                {medicineInfo.result.medicine_info[item.field] || "N/A"}
-              </span>
-            </div>
-          ))}
+          {language != "kn" ? (
+            [
+              {
+                label: translations[language].DosageFormVal,
+                field: "dosage",
+              },
+              {
+                label: translations[language].SideEffectsVal,
+                field: "sideEffects",
+              },
+              { label: translations[language].AgeGrpVal, field: "ageGroup" },
+              { label: translations[language].PurposeVal, field: "purpose" },
+              {
+                label: translations[language].GeneralPrecautionsVal,
+                field: "generalPrecautions",
+              },
+              {
+                label: translations[language].WarningsVal,
+                field: "warnings",
+              },
+              {
+                label: translations[language].AdverseActionsVal,
+                field: "adverseActions",
+              },
+              {
+                label: translations[language].OverdosageVal,
+                field: "overdosage",
+              },
+            ].map((item) => (
+              <div key={item.field} className="medicine-detail-scanurl">
+                <span className="detail-label-scanurl">{item.label}</span>
+                <span className="detail-value-scanurl">
+                  {medicineInfo.result.medicine_info[item.field] || "N/A"}
+                </span>
+              </div>
+            ))
+          ) : (
+            <>
+              <div className="kannadaInfoBlock">
+                <span className="kannadaHeadingsspan">
+                  {translations[language].DosageFormVal}
+                </span>
+                <span>{dosage}</span>
+              </div>
+              <div className="kannadaInfoBlock">
+                <span className="kannadaHeadingsspan">
+                  {translations[language].SideEffectsVal}
+                </span>
+                <span>{sideEffects}</span>
+              </div>
+              <div className="kannadaInfoBlock">
+                <span className="kannadaHeadingsspan">
+                  {translations[language].AgeGrpVal}
+                </span>
+                <span>{ageGroup}</span>
+              </div>
+              <div className="kannadaInfoBlock">
+                <span className="kannadaHeadingsspan">
+                  {translations[language].PurposeVal}
+                </span>
+                <span>{purpose}</span>
+              </div>
+              <div className="kannadaInfoBlock">
+                <span className="kannadaHeadingsspan">
+                  {translations[language].GeneralPrecautionsVal}
+                </span>
+                <span>{generalPrecautions}</span>
+              </div>
+              <div className="kannadaInfoBlock">
+                <span className="kannadaHeadingsspan">
+                  {translations[language].WarningsVal}
+                </span>
+                <span>{warnings}</span>
+              </div>
+              <div className="kannadaInfoBlock">
+                <span className="kannadaHeadingsspan">
+                  {translations[language].AdverseActionsVal}
+                </span>
+                <span>{adverseActions}</span>
+              </div>
+              <div className="kannadaInfoBlock">
+                <span className="kannadaHeadingsspan">
+                  {translations[language].OverdosageVal}
+                </span>
+                <span>{overdosage}</span>
+              </div>
+            </>
+          )}
         </div>
       </>
     );

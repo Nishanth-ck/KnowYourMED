@@ -152,20 +152,25 @@
 @media screen and (max-width: 768px) {
   .nav-links-container-userhome {
     margin-right: 0;
+    margin-top: 10px;
+    margin-left: 12px;
+    /* flex-direction: column; */
     justify-content: center;
     width: 100%;
-    padding-top: 60px;
+    /* padding-top: 60px; */
   }
 
   .language-selector4 {
     top: auto;
     bottom: 10px;
-    right: 50%;
+    right: 30%;
     transform: translateX(50%);
   }
 
   .user-home-navbar {
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     padding-bottom: 60px;
   }
 
