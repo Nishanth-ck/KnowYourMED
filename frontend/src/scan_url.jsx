@@ -174,7 +174,7 @@ const ScanURL = () => {
         const response = await fetch(
           `https://know-your-med-backend.vercel.app/medicine/info/${uniqueId}`,
           {
-            credentials: true,
+            credentials: "include",
           }
         );
         if (response.ok) {
