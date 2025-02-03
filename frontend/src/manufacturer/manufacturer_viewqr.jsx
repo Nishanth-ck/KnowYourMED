@@ -48,13 +48,16 @@ function ManufacturerViewQR() {
   useEffect(() => {
     if (userId) {
       // Send POST request to fetch QR data for the userId
-      fetch("http://localhost:3000/manufacture/generated-qr", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userId: userId }), // Send userId in the body
-      })
+      fetch(
+        "https://know-your-med-backend.vercel.app/manufacture/generated-qr",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId: userId }), // Send userId in the body
+        }
+      )
         .then((response) => response.json())
         .then((data) => {
           console.log(data); // Log the response to see its structure

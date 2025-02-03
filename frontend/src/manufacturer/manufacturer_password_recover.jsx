@@ -110,7 +110,7 @@ const ManufacturerLoginRecover = () => {
     setError("");
     try {
       const response = await fetch(
-        "http://localhost:3000/auth/manufacture/email-verification",
+        "https://know-your-med-backend.vercel.app/auth/manufacture/email-verification",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -153,7 +153,7 @@ const ManufacturerLoginRecover = () => {
     setError("");
     try {
       const response = await fetch(
-        "http://localhost:3000/auth/manufacture/password-reset",
+        "https://know-your-med-backend.vercel.app/auth/manufacture/password-reset",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -327,7 +327,7 @@ export default ManufacturerLoginRecover;
 //     setError("");
 //     try {
 //       const response = await fetch(
-//         "http://localhost:3000/auth/manufacture/email-verification",
+//         "https://know-your-med-backend.vercel.app/auth/manufacture/email-verification",
 //         {
 //           method: "POST",
 //           headers: { "Content-Type": "application/json" },
@@ -369,7 +369,7 @@ export default ManufacturerLoginRecover;
 //     setError("");
 //     try {
 //       const response = await fetch(
-//         "http://localhost:3000/auth/manufacture/password-reset",
+//         "https://know-your-med-backend.vercel.app/auth/manufacture/password-reset",
 //         {
 //           method: "POST",
 //           headers: { "Content-Type": "application/json" },

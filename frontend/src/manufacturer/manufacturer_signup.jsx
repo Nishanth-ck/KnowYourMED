@@ -140,7 +140,7 @@ const ManufacturerSignup = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/auth/user/new/email-verification",
+        "https://know-your-med-backend.vercel.app/auth/user/new/email-verification",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -183,7 +183,7 @@ const ManufacturerSignup = () => {
     if (enteredOtp === expectedOtp) {
       try {
         const registerResponse = await fetch(
-          "http://localhost:3000/auth/manufacture/register",
+          "https://know-your-med-backend.vercel.app/auth/manufacture/register",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -514,7 +514,7 @@ export default ManufacturerSignup;
 
 //     try {
 //       const response = await fetch(
-//         "http://localhost:3000/auth/manufacture/register",
+//         "https://know-your-med-backend.vercel.app/auth/manufacture/register",
 //         {
 //           method: "POST",
 //           headers: { "Content-Type": "application/json" },

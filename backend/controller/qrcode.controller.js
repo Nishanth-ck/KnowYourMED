@@ -32,7 +32,7 @@ const handleQRCodeGeneration = async (req, res) => {
     };
 
     const response = await axios.get(
-      `http://localhost:3000/medicine/${medicine_name}`
+      `https://know-your-med-backend.vercel.app/medicine/${medicine_name}`
     );
 
     let medicineInfo = {};

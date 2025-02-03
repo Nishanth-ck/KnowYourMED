@@ -150,7 +150,7 @@ const UserSignup = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/auth/user/new/email-verification",
+        "https://know-your-med-backend.vercel.app/auth/user/new/email-verification",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -199,7 +199,7 @@ const UserSignup = () => {
       console.log("OTP matched, proceeding with registration");
       try {
         const registerResponse = await fetch(
-          "http://localhost:3000/auth/user/register",
+          "https://know-your-med-backend.vercel.app/auth/user/register",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -537,7 +537,7 @@ export default UserSignup;
 //     setError("");
 
 //     try {
-//       const response = await fetch("http://localhost:3000/auth/user/register", {
+//       const response = await fetch("https://know-your-med-backend.vercel.app/auth/user/register", {
 //         method: "POST",
 //         headers: { "Content-Type": "application/json" },
 //         body: JSON.stringify(formData),

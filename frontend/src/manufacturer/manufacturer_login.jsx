@@ -86,7 +86,7 @@ const ManufacturerLogin = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/auth/manufacture/login",
+        "https://know-your-med-backend.vercel.app/auth/manufacture/login",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

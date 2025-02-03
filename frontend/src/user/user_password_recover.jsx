@@ -110,7 +110,7 @@ const UserLoginRecover = () => {
     setError("");
     try {
       const response = await fetch(
-        "http://localhost:3000/auth/user/email-verification",
+        "https://know-your-med-backend.vercel.app/auth/user/email-verification",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -153,7 +153,7 @@ const UserLoginRecover = () => {
     setError("");
     try {
       const response = await fetch(
-        "http://localhost:3000/auth/user/password-reset",
+        "https://know-your-med-backend.vercel.app/auth/user/password-reset",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -348,7 +348,7 @@ export default UserLoginRecover;
 //     const translatedTexts = {};
 //     for (const word of wordsToTranslate) {
 //       try {
-//         const response = await fetch("http://localhost:3000/translate/", {
+//         const response = await fetch("https://know-your-med-backend.vercel.app/translate/", {
 //           method: "POST",
 //           headers: {
 //             "Content-Type": "application/json",
@@ -425,7 +425,7 @@ export default UserLoginRecover;
 //     setError("");
 //     try {
 //       const response = await fetch(
-//         "http://localhost:3000/auth/user/email-verification",
+//         "https://know-your-med-backend.vercel.app/auth/user/email-verification",
 //         {
 //           method: "POST",
 //           headers: { "Content-Type": "application/json" },
@@ -481,7 +481,7 @@ export default UserLoginRecover;
 //     setError("");
 //     try {
 //       const response = await fetch(
-//         "http://localhost:3000/auth/user/password-reset",
+//         "https://know-your-med-backend.vercel.app/auth/user/password-reset",
 //         {
 //           method: "POST",
 //           headers: { "Content-Type": "application/json" },

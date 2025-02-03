@@ -90,7 +90,7 @@ const MedicineInfo = () => {
     try {
       // Fetch medicine details from backend API
       const response = await axios.get(
-        `http://localhost:3000/medicine/${query}`
+        `https://know-your-med-backend.vercel.app/medicine/${query}`
       );
       console.log(response.data?.medicine);
 

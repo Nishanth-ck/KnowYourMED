@@ -52,7 +52,7 @@ const ViewNotifications = () => {
   useEffect(() => {
     // Fetch notifications from the backend using POST with userId
     if (userId) {
-      fetch("http://localhost:3000/maintain/get-pill", {
+      fetch("https://know-your-med-backend.vercel.app/maintain/get-pill", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
