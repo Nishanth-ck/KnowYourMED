@@ -153,6 +153,7 @@ const UserSignup = () => {
         "https://know-your-med-backend.vercel.app/auth/user/new/email-verification",
         {
           method: "POST",
+          credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: formData.email }),
         }
@@ -202,6 +203,7 @@ const UserSignup = () => {
           "https://know-your-med-backend.vercel.app/auth/user/register",
           {
             method: "POST",
+            credentials: "include",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData),
           }

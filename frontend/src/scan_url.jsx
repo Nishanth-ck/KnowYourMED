@@ -172,7 +172,10 @@ const ScanURL = () => {
     const fetchMedicineInfo = async () => {
       try {
         const response = await fetch(
-          `https://know-your-med-backend.vercel.app/medicine/info/${uniqueId}`
+          `https://know-your-med-backend.vercel.app/medicine/info/${uniqueId}`,
+          {
+            credentials: true,
+          }
         );
         if (response.ok) {
           const data = await response.json();

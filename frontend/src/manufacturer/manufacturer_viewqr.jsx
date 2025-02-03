@@ -52,6 +52,7 @@ function ManufacturerViewQR() {
         "https://know-your-med-backend.vercel.app/manufacture/generated-qr",
         {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },

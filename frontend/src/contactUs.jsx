@@ -87,6 +87,7 @@ const ContactUsPage = () => {
         `https://know-your-med-backend.vercel.app/contact/feedback`,
         {
           method: "POST",
+          credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(feedbackDetails),
         }

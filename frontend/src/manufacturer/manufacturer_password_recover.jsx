@@ -113,6 +113,7 @@ const ManufacturerLoginRecover = () => {
         "https://know-your-med-backend.vercel.app/auth/manufacture/email-verification",
         {
           method: "POST",
+          credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: formData.email }),
         }
@@ -156,6 +157,7 @@ const ManufacturerLoginRecover = () => {
         "https://know-your-med-backend.vercel.app/auth/manufacture/password-reset",
         {
           method: "POST",
+          credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             email: formData.email,

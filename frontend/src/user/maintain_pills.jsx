@@ -149,6 +149,7 @@ const MaintainPills = () => {
     collectedTasks.forEach((task) => {
       fetch(backendUrl, {
         method: "POST",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           pillName: task.pillName,

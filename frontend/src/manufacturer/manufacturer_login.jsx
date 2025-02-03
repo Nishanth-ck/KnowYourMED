@@ -89,6 +89,7 @@ const ManufacturerLogin = () => {
         "https://know-your-med-backend.vercel.app/auth/manufacture/login",
         {
           method: "POST",
+          credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),
         }
