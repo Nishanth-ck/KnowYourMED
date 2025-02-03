@@ -20,12 +20,33 @@ const corsOptions = {
   methods: ["GET", "POST"],
   allowedHeaders: "Content-Type,Authorization",
   credentials: true,
-  origin: [
-    "https://know-your-med-lake.vercel.app",
-    "https://know-your-medicine.vercel.app",
-  ],
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      "https://know-your-med-lake.vercel.app",
+      "https://know-your-medicine.vercel.app",
+      "https://www.know-your-medicine.vercel.app",
+    ];
+
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   maxAge: 86400,
 };
+
+// const corsOptions = {
+//   methods: ["GET", "POST"],
+//   allowedHeaders: "Content-Type,Authorization",
+//   credentials: true,
+//   origin: [
+//     "https://know-your-med-lake.vercel.app",
+//     "https://know-your-medicine.vercel.app",
+//     "https://www.know-your-medicine.vercel.app",
+//   ],
+//   maxAge: 86400,
+// };
 
 // app.use((req, res, next) => {
 //   res.header(
