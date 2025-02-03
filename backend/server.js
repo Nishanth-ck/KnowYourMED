@@ -17,21 +17,12 @@ const corsOptions = {
   method: "GET,POST",
   allowedHeaders: "Content-Type,Authorization",
   credentials: true,
-  origin: "http://localhost:5173",
+  origin: "https://know-your-med-lake.vercel.app",
   maxAge: 86400,
 };
 
 dotenv.config();
 const app = express();
-
-// app.use(function (req, res, next) {
-//   res.header("Access-Control-Allow-Origin", req.headers.origin);
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   next();
-// });
 
 app.use(cors(corsOptions));
 app.use(express.json());
