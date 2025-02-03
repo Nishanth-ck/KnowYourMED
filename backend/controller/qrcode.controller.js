@@ -70,7 +70,7 @@ const handleQRCodeGeneration = async (req, res) => {
     }
 
     const text =
-      "https://know-your-med-lake.vercel.app/medicine/info/" +
+      "https://know-your-medicine.vercel.app/medicine/info/" +
       result._id.toString() +
       "  " +
       "medicine name : " +

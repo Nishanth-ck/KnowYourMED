@@ -20,7 +20,10 @@ const corsOptions = {
   methods: ["GET", "POST"],
   allowedHeaders: "Content-Type,Authorization",
   credentials: true,
-  origin: "https://know-your-med-lake.vercel.app",
+  origin: [
+    "https://know-your-med-lake.vercel.app",
+    "https://know-your-medicine.vercel.app",
+  ],
   maxAge: 86400,
 };
 

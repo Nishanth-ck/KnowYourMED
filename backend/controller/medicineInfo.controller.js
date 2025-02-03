@@ -53,14 +53,19 @@ const handleMedInfo = async (req, res) => {
 
 const handleMedRetrieve = async (req, res) => {
   const medId = req.params.medId;
-
+  const regex = /^[a-fA-F0-9]{24}/;
+  const match = medId.match(regex);
   try {
-    const result = await Qr.findById(medId);
-
-    res.status(200).json({ message: "Done", result });
+    let result;
+    if (match) {
+      result = await Qr.findById(match);
+    } else {
+      result = await Qr.findById(medId);
+    }
+    return res.status(200).json({ message: "Done", result });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: "Try again later" });
+    return res.status(500).json({ error: "Try again later" });
   }
 };
 

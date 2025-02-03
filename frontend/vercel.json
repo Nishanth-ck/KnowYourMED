@@ -11,7 +11,7 @@
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
-          "value": "https://know-your-med-lake.vercel.app"
+          "value": "know-your-medicine.vercel.app"
         },
         {
           "key": "Access-Control-Allow-Methods",
