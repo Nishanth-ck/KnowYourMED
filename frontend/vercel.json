@@ -11,7 +11,7 @@
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
-          "value": "https://projectsworkboard.vercel.app"
+          "value": "https://know-your-med-lake.vercel.app"
         },
         {
           "key": "Access-Control-Allow-Methods",
