@@ -80,7 +80,7 @@ const handleEmail = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: "Try again later!" });
+    return res.status(500).json({ error: "Try again later!" });
   }
 };
 
@@ -100,7 +100,7 @@ const handeNewEmail = async (req, res) => {
     let mailOptions = {
       from: "knowyourmed1@gmail.com",
       to: `${email}`,
-      subject: "To Update the Password",
+      subject: "Use this OTP during registration process to verify email",
       text: `${num}`,
     };
 
@@ -117,7 +117,7 @@ const handeNewEmail = async (req, res) => {
     return res.status(200).json({ otp: num });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: "Try again later!" });
+    return res.status(500).json({ error: "Try again later!" });
   }
 };
 
@@ -170,12 +170,6 @@ const handleUserLogin = async (req, res) => {
       expiresIn: 24 * 60 * 60 * 100,
     });
 
-    // res.cookie("jwt", refToken, {
-    //   httpOnly: true,
-    //   maxAge: 24 * 60 * 60 * 100,
-    //   secure: false,
-    // });
-
     const response = await User.findByIdAndUpdate(
       existingUser._id,
       {
@@ -187,9 +181,8 @@ const handleUserLogin = async (req, res) => {
     return res.status(200).json({ accessToken: accToken, response });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: "Try again Later" });
+    return res.status(500).json({ error: "Try again Later" });
   }
-  res.status(200).json({ message: "User Login" });
 };
 
 const handleUserLogout = async (req, res) => {
@@ -223,7 +216,7 @@ const handleUserLogout = async (req, res) => {
     return res.status(204).json({ message: "Logout Successfull!" });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: "Try again later!" });
+    return res.status(500).json({ error: "Try again later!" });
   }
 };
 

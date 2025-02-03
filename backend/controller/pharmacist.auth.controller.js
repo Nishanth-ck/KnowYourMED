@@ -80,7 +80,7 @@ const handlePharmacistEmail = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: "Try again later!" });
+    return res.status(500).json({ error: "Try again later!" });
   }
 };
 
@@ -189,7 +189,7 @@ const handlePharmacistLogout = async (req, res) => {
     return res.status(204).json({ message: "Logout Successfull!" });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: "Try again later!" });
+    return res.status(500).json({ error: "Try again later!" });
   }
 };
 
