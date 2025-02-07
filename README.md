@@ -19,6 +19,6 @@ c) Create a .env file in the backend folder and set the following variables : <b
     (go to google account -> security -> 2 step verification -> app passwords in search bar -> 'nodemailer' -> get the pass key )
   
 d)To run the project :
-  Use two terminals :
+  Use two terminals : <br>
     cd frontend -> npm install --legacy-peer-deps -> npm run dev -> it will start on : http://localhost:5173/ <br>
     cd backend -> npm install -> npm start -> it will start on : http://localhost:3000/ (the port number)
