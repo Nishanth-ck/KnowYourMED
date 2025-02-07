@@ -10,15 +10,15 @@ a) Open command prompt or Git Bash and Go to the required folder on your system
 
 b) Type : "git clone https://github.com/Nishanth-ck/KnowYourMED.git" and clone the repository
 
-c) Create a .env file in the backend folder and set the following variables : 
-    1)PORT ----- the port no,
-    2)MONGO_URL ----- the mongodb atlas url,
-    3)SEC_ACC ----- some random string,
-    4)SEC_REF ----- some random string,
+c) Create a .env file in the backend folder and set the following variables : <br>
+    1)PORT ----- the port no, <br>
+    2)MONGO_URL ----- the mongodb atlas url, <br>
+    3)SEC_ACC ----- some random string, <br>
+    4)SEC_REF ----- some random string, <br>
     5)EMAIL_PASS ----- generated for a gmail account to be used . (Use Ctrl+Shift+F to replace the gmail account : webdevelepor001nishanth@gmail.com with your required gmail account)
     (go to google account -> security -> 2 step verification -> app passwords in search bar -> 'nodemailer' -> get the pass key )
   
 d)To run the project :
   Use two terminals :
-    cd frontend -> npm install --legacy-peer-deps -> npm run dev -> it will start on : http://localhost:5173/
+    cd frontend -> npm install --legacy-peer-deps -> npm run dev -> it will start on : http://localhost:5173/ <br>
     cd backend -> npm install -> npm start -> it will start on : http://localhost:3000/ (the port number)
