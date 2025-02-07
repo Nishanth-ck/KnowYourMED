@@ -15,7 +15,7 @@ c) Create a .env file in the backend folder and set the following variables :
     2)MONGO_URL ----- the mongodb atlas url,
     3)SEC_ACC ----- some random string,
     4)SEC_REF ----- some random string,
-    5)EMAIL_PASS ----- generated for a gmail account to be used . (Use Ctrl+F to replace the gmail account : webdevelepor001nishanth@gmail.com with your required gmail account)
+    5)EMAIL_PASS ----- generated for a gmail account to be used . (Use Ctrl+Shift+F to replace the gmail account : webdevelepor001nishanth@gmail.com with your required gmail account)
     (go to google account -> security -> 2 step verification -> app passwords in search bar -> 'nodemailer' -> get the pass key )
   
 d)To run the project :
