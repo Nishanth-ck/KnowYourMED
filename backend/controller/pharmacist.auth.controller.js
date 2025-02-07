@@ -54,13 +54,13 @@ const handlePharmacistEmail = async (req, res) => {
       let transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: "knowyourmed1@gmail.com",
+          user: "webdevelepor001nishanth@gmail.com",
           pass: `${process.env.EMAIL_PASS}`,
         },
       });
 
       let mailOptions = {
-        from: "knowyourmed1@gmail.com",
+        from: "webdevelepor001nishanth@gmail.com",
         to: `${email}`,
         subject: "To Update the Password",
         text: `${num}`,

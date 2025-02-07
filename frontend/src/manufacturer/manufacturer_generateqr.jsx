@@ -99,7 +99,7 @@ const GenerateQR = () => {
       const newData = { ...formData, userId: userId };
       console.log("Sending data to backend:", newData);
       const response = await axios.post(
-        "https://know-your-med-backend.vercel.app/generate-qr",
+        "http://localhost:3000/generate-qr",
         newData
       );
       console.log("QR Code generated:", response.data.qrCode);

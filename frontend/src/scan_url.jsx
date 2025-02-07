@@ -105,56 +105,56 @@ const ScanURL = () => {
 
       try {
         const responseAdvReact = await axios.post(
-          "https://know-your-med-backend.vercel.app/translate",
+          "http://localhost:3000/translate",
           {
             text: newData[0],
           }
         );
         setAdverseActions(responseAdvReact.data.translatedText);
         const responseAgeGroup = await axios.post(
-          "https://know-your-med-backend.vercel.app/translate",
+          "http://localhost:3000/translate",
           {
             text: newData[1],
           }
         );
         setAgeGroup(responseAgeGroup.data.translatedText);
         const responseDosage = await axios.post(
-          "https://know-your-med-backend.vercel.app/translate",
+          "http://localhost:3000/translate",
           {
             text: newData[2],
           }
         );
         setDosage(responseDosage.data.translatedText);
         const responseGenPre = await axios.post(
-          "https://know-your-med-backend.vercel.app/translate",
+          "http://localhost:3000/translate",
           {
             text: newData[3],
           }
         );
         setGeneralPrecautions(responseGenPre.data.translatedText);
         const responseOverDosage = await axios.post(
-          "https://know-your-med-backend.vercel.app/translate",
+          "http://localhost:3000/translate",
           {
             text: newData[4],
           }
         );
         setOverDosage(responseOverDosage.data.translatedText);
         const responsePurpose = await axios.post(
-          "https://know-your-med-backend.vercel.app/translate",
+          "http://localhost:3000/translate",
           {
             text: newData[5],
           }
         );
         setPurpose(responsePurpose.data.translatedText);
         const responseSideEffects = await axios.post(
-          "https://know-your-med-backend.vercel.app/translate",
+          "http://localhost:3000/translate",
           {
             text: newData[6],
           }
         );
         setSideEffects(responseSideEffects.data.translatedText);
         const responseWarnings = await axios.post(
-          "https://know-your-med-backend.vercel.app/translate",
+          "http://localhost:3000/translate",
           {
             text: newData[7],
           }
@@ -172,7 +172,7 @@ const ScanURL = () => {
     const fetchMedicineInfo = async () => {
       try {
         const response = await fetch(
-          `https://know-your-med-backend.vercel.app/medicine/info/${uniqueId}`,
+          `http://localhost:3000/medicine/info/${uniqueId}`,
           {
             credentials: "include",
           }

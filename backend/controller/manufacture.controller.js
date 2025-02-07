@@ -1,5 +1,4 @@
 import Qr from "../model/qr.js";
-import { stringify } from "flatted";
 
 const handleManufactureGeneratedInfo = async (req, res) => {
   const { userId } = req.body;

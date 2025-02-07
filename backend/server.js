@@ -43,22 +43,10 @@ const app = express();
 // };
 
 const corsOptions = {
-  origin: function (origin, callback) {
-    const allowedOrigins = [
-      "https://know-your-med-lake.vercel.app",
-      "https://know-your-medicine.vercel.app",
-      "https://www.know-your-medicine.vercel.app",
-    ];
-
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  method: "GET,POST",
+  allowedHeaders: "Content-Type,Authorization",
   credentials: true,
+  origin: "http://localhost:5173",
   maxAge: 86400,
 };
 
@@ -84,7 +72,7 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-const PORT = process.env.PORT || 3300;
+const PORT = process.env.PORT || 3000;
 
 if (!process.env.MONGO_URL) {
   console.error("MONGO_URL is not defined in environment variables!");

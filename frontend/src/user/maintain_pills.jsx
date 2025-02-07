@@ -141,8 +141,7 @@ const MaintainPills = () => {
   const sendToBackend = () => {
     console.log("Collected Tasks for Backend:", collectedTasks);
 
-    const backendUrl =
-      "https://know-your-med-backend.vercel.app/maintain/save-pill";
+    const backendUrl = "http://localhost:3000/maintain/save-pill";
 
     const email = sessionStorage.getItem("email");
 

@@ -88,12 +88,9 @@ const MedicineInfo = () => {
   // Function to translate text using the API
   const translateText = async (text) => {
     try {
-      const response = await axios.post(
-        "https://know-your-med-backend.vercel.app/translate",
-        {
-          text: text,
-        }
-      );
+      const response = await axios.post("http://localhost:3000/translate", {
+        text: text,
+      });
       return response.data.translatedText;
     } catch (err) {
       console.error("Error translating text:", err);
@@ -121,7 +118,7 @@ const MedicineInfo = () => {
   const fetchMedicineDetails = async (query) => {
     try {
       const response = await axios.get(
-        `https://know-your-med-backend.vercel.app/medicine/${query}`,
+        `http://localhost:3000/medicine/${query}`,
         { withCredentials: true }
       );
       const details = response.data;
@@ -408,7 +405,7 @@ export default MedicineInfo;
 //     try {
 //       // Fetch medicine details from backend API
 //       const response = await axios.get(
-//         `https://know-your-med-backend.vercel.app/medicine/${query}`,
+//         `http://localhost:3000/medicine/${query}`,
 //         { withCredentials: true }
 //       );
 //       console.log(response.data?.medicine);

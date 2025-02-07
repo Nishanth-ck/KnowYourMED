@@ -83,15 +83,12 @@ const ContactUsPage = () => {
     console.log("Collected data for Backend:", feedbackDetails);
 
     try {
-      const response = await fetch(
-        `https://know-your-med-backend.vercel.app/contact/feedback`,
-        {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(feedbackDetails),
-        }
-      );
+      const response = await fetch(`http://localhost:3000/contact/feedback`, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(feedbackDetails),
+      });
 
       const data = await response.json();
       if (data.message === "Done") {

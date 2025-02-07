@@ -17,14 +17,14 @@ const handleUserNotify = async (
   const transporter = nodemailer.createTransport({
     service: "gmail", // Use your email service provider
     auth: {
-      user: "knowyourmed1@gmail.com",
+      user: "webdevelepor001nishanth@gmail.com",
       pass: process.env.EMAIL_PASS, // Use app passwords for Gmail if needed
     },
   });
 
   // Email options
   const mailOptions = {
-    from: "knowyourmed1@gmail.com",
+    from: "webdevelepor001nishanth@gmail.com",
     to: `${email}`,
     subject: "Medicine Reminder",
     text: "This is a friendly reminder to take your medicines.",

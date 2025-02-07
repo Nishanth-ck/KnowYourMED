@@ -13,15 +13,15 @@ const handleContactPage = async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "knowyourmed1@gmail.com",
+        user: "webdevelepor001nishanth@gmail.com",
         pass: `${process.env.EMAIL_PASS}`,
       },
     });
 
     // Email options
     const mailOptions = {
-      from: "knowyourmed1@gmail.com",
-      to: "knowyourmed1@gmail.com",
+      from: "webdevelepor001nishanth@gmail.com",
+      to: "webdevelepor001nishanth@gmail.com",
       subject: "Feedback",
       text: `${processedInfo}`,
     };

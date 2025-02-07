@@ -86,7 +86,7 @@ const ManufacturerLogin = () => {
 
     try {
       const response = await fetch(
-        "https://know-your-med-backend.vercel.app/auth/manufacture/login",
+        "http://localhost:3000/auth/manufacture/login",
         {
           method: "POST",
           credentials: "include",
