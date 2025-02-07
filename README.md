@@ -1,6 +1,9 @@
-KnowYourMED - A Full Stack Q.R Code Application for Smarter Medication Management
+# KnowYourMED - A Full Stack Q.R Code Application for Smarter Medication Management
 
 This project was developed as part of my College's 5th semester Mini Project Subject Course. I contributed to my team by developing the frontend of this project.
+
+The tech stack used in this project are :
+ReactJs,NodeJs,ExpressJs,MongoDB,Nodemailer,OpenFDA API,Google Translate API,JsQR library.
 
 KnowYourMED is a smart, full-stack web application designed to enhance medicine safety by detecting expiry dates and counterfeit medicines using QR code technology. By simply scanning a QR code on medicine packaging, users can access detailed medicine information and receive real-time notifications via email before their medication expires. The system is built with multilingual support, ensuring accessibility for diverse users, including those in rural areas. With a focus on health security, user engagement, and counterfeit prevention, KnowYourMED aims to revolutionize medication management, reduce health risks, and promote safer pharmaceutical practices. 🚀
 
